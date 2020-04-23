@@ -106,12 +106,13 @@ public class MainActivity extends AppCompatActivity {
 
     private String localVideoPath;
 
+    //复制Assets下的文件到存储卡
     public void copyVideoToLocalPath() {
         localVideoPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/DCIM/Camera/local_video.mp4";
         if (new File(localVideoPath).exists()) return;
 
         try {
-
+            //用的是com.blankj.utilcode 库的工具
             InputStream myInput = this.getAssets().open("local_video.mp4");
             FileIOUtils.writeFileFromIS(localVideoPath, myInput);
 
@@ -310,7 +311,6 @@ public class MainActivity extends AppCompatActivity {
         Glide.with(this).load(glideUrl).into(iv);*/
 
     }
-
 
 
     @Override
