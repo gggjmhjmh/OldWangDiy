@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.app.yf.myapplication">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <!--        <meta-data-->
+        <!--            android:name="com.app.yf.myapplication.view.activity.glide_config.MyGlideModule"-->
+        <!--            android:value="GlideModule" />-->
+
+        <!--        tinker热修复-->
+        <!--        <meta-data android:name="TINKER_ID" android:value="4e4dd402299585ee"/>-->
+
+        <activity
+            android:name=".view.activity.MainActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".view.activity.TwoActivity" />
+        <activity android:name=".view.activity.ThreeActivity" />
+
+    </application>
+
+</manifest>

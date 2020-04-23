@@ -1,0 +1,20 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+<!--        <item name="android:windowNoTitle">true</item>-->
+        <item name="windowNoTitle">true</item>
+<!--        <item name="android:windowActionBar">false</item>-->
+
+        <item name="android:windowContentTransitions">true</item>
+        <!--动画重叠，默认true,false就是要等另一个动画走完了才走该动画-->
+<!--        <item name="android:windowAllowEnterTransitionOverlap">false</item>-->
+<!--        <item name="android:windowAllowReturnTransitionOverlap">false</item>-->
+    </style>
+
+</resources>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.activity.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/iv"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_margin="20dp"
+            android:background="@color/colorAccent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18dp" />
+
+        <EditText
+            android:id="@+id/et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textColor="@color/colorAccent"
+            android:textSize="18dp" />
+
+
+    </LinearLayout>
+
+    <com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer
+        android:id="@+id/player"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:visibility="visible"
+        tools:ignore="MissingConstraints" />
+
+    <com.shuyu.gsyvideoplayer.video.GSYADVideoPlayer
+        android:id="@+id/ad_player"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:visibility="visible"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="300dp"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="294dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

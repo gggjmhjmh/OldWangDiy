@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="2dp">
+        <!--        style="@style/MaterialAnimations.TextAppearance.Title"-->
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorAccent" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="activity2" />
+        <!--        android:transitionName="@string/sample_blue_title"-->
+        <!--        style="@style/MaterialAnimations.TextAppearance.Title.Inverse"-->
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <!-- <TextView
+         style="@style/MaterialAnimations.Text.Body"
+         android:text="Toolbar 的标题在 MainActivity 和 此Activity 是一个共享的元素。" />
+
+     <FrameLayout
+         android:id="@+id/sample2_content"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent" />
+ -->
+
+
+    <TextView
+        android:layout_below="@+id/toolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:layout_marginTop="50dp"
+        android:background="@color/colorAccent"
+        android:text="TextView1"
+        android:textColor="@color/colorAccent"
+        android:textSize="40dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:layout_marginTop="250dp"
+        android:background="@color/colorAccent"
+        android:text="TextView1"
+        android:textColor="@color/colorAccent"
+        android:textSize="40dp"
+        android:transitionName="TextView1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+        android:layout_marginTop="350dp"
+        android:background="@color/colorAccent"
+        android:text="TextView1"
+        android:textColor="@color/colorAccent"
+        android:textSize="40dp" />
+</RelativeLayout>
