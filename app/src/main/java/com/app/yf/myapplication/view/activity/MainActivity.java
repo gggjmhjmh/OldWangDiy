@@ -9,24 +9,16 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.app.yf.myapplication.R;
-import com.blankj.utilcode.util.BusUtils;
 import com.blankj.utilcode.util.FileIOUtils;
 import com.blankj.utilcode.util.ImageUtils;
-import com.blankj.utilcode.util.IntentUtils;
-import com.blankj.utilcode.util.KeyboardUtils;
-import com.blankj.utilcode.util.SDCardUtils;
-import com.blankj.utilcode.util.UriUtils;
-import com.blankj.utilcode.util.VibrateUtils;
+import com.blankj.utilcode.util.TouchUtils;
 import com.bumptech.glide.Glide;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.FileCallback;
@@ -44,7 +36,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-import androidx.annotation.Nullable;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
@@ -65,6 +57,9 @@ public class MainActivity extends AppCompatActivity {
         target = findViewById(R.id.iv);
 //        okgo();
 
+
+        ADVideoPlayer = findViewById(R.id.ad_player);
+        videoPlayer = findViewById(R.id.player);
         gsyVideo();
 
 
@@ -75,50 +70,105 @@ public class MainActivity extends AppCompatActivity {
         test();
     }
 
+
     private void test() {
-        TextView tv1 = findViewById(R.id.tv1);
-        TextView et = findViewById(R.id.et);
+        target.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                target.setTranslationX(300f);
+                target.setRotation(target.getRotation() + 45);
+            }
+        });
+        target.setOnTouchListener(new TouchUtils.OnTouchUtilsListener() {
 
+            @Override
+            public boolean onDown(View view, int x, int y, MotionEvent event) {
+                return true;
+            }
 
+            @Override
+            public boolean onMove(View view, int direction, int x, int y, int dx, int dy, int totalX, int totalY, MotionEvent event) {
+                //自己的位置+相对上一次所移动的位置
+                target.setX(target.getX() + dx);
+                target.setY(target.getY() + dy);
+                //或
+//                target.setTranslationX(target.getTranslationX() + dx);
+//                target.setTranslationY(target.getTranslationY() + dy);
+
+//                target.requestLayout();
+                return true;
+            }
+
+            @Override
+            public boolean onStop(View view, int direction, int x, int y, int totalX, int totalY, int vx, int vy, MotionEvent event) {
+                return true;
+            }
+        });
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
 
-    }
-
-    private void checkPermission() {
+    /**
+     * 检查权限
+     *
+     * @return
+     */
+    private boolean checkPermission() {
         //检查权限（NEED_PERMISSION）是否被授权 PackageManager.PERMISSION_GRANTED表示同意授权
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             //用户已经拒绝过一次，再次弹出权限申请对话框需要给用户一个解释
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                Toast.makeText(this, "请开通相关权限，否则无法正常使用本应用！", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "请开通相关权限，否则无法正常使用本应用！", Toast.LENGTH_LONG).show();
             }
             //申请权限
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-
+            return false;
         } else {
-            Toast.makeText(this, "授权成功！", Toast.LENGTH_SHORT).show();
-            Log.e("", "checkPermission: 已经授权！");
+            Toast.makeText(this, "已经授权 存储权限！", Toast.LENGTH_SHORT).show();
+            Log.e(TAG, "checkPermission: 已经授权！");
+            return true;
         }
     }
 
-    private String localVideoPath;
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-    //复制Assets下的文件到存储卡
-    public void copyVideoToLocalPath() {
-        localVideoPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/DCIM/Camera/local_video.mp4";
-        if (new File(localVideoPath).exists()) return;
+        boolean flag = true; //是否全部权限都同意
+        for (int i = 0; i < permissions.length; i++) {
+            if (grantResults[i] == -1) { //如果有一个没同意,-1是没同意; 0是同意
+                flag = false;
+                break;
+            }
+        }
+        //如果都同意了
+        if (flag) {
+            // TODO:  做权限同意后才能做的事
+            gsyVideo();
+        }
+
+    }
+
+    /**
+     * 复制Assets下的文件到存储卡
+     *
+     * @param assetsFileName assets下的要复制的文件名
+     * @param sdFolder       sd卡保存位置的文件夹路径
+     * @return sd卡保存的文件路径
+     */
+    public String copyVideoToLocalPath(String assetsFileName, String sdFolder) {
+        String localFilePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + sdFolder + "/" + assetsFileName;
+        if (new File(localFilePath).exists()) return localFilePath;
 
         try {
+            InputStream myInput = this.getAssets().open(assetsFileName);
             //用的是com.blankj.utilcode 库的工具
-            InputStream myInput = this.getAssets().open("local_video.mp4");
-            FileIOUtils.writeFileFromIS(localVideoPath, myInput);
-
+            if (FileIOUtils.writeFileFromIS(localFilePath, myInput)) {
+                return localFilePath;
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return null;
     }
 
     /**
@@ -130,9 +180,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void gsyVideo() {
 
-        checkPermission();
-        ADVideoPlayer = findViewById(R.id.ad_player);
-        videoPlayer = findViewById(R.id.player);
+        if (!checkPermission()) return;
 
         //EXOPlayer内核，支持格式更多
 //        PlayerFactory.setPlayManager(Exo2PlayerManager.class);
@@ -145,8 +193,8 @@ public class MainActivity extends AppCompatActivity {
 //            String url = Uri.parse("file:///android_asset/" +  "guide.mp4").getPath();
 //        String url = RawResourceDataSource.buildRawResourceUri(R.raw.guide).getPath();
 
-        copyVideoToLocalPath();
-        String url = localVideoPath;
+
+        String url = copyVideoToLocalPath("local_video.mp4", "aaa");
 
 
         urls.add(new GSYSampleADVideoPlayer.GSYADVideoModel(url, "", GSYSampleADVideoPlayer.GSYADVideoModel.TYPE_AD));
@@ -256,19 +304,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    //画质压缩
-    private void sdlk() {
-        Bitmap bitmap = BitmapFactory.decodeFile(""); //图片源
-//        ImageUtils.bitmap2Bytes(bitmap, Bitmap.CompressFormat.JPEG); //bitmap转byte[]
-        byte[] bytes = ImageUtils.compressByQuality(bitmap, 80);
-
-        String path = Environment.getExternalStorageDirectory().getPath() + "/NAME_PIC_FILE.jpg";
-        FileIOUtils.writeFileFromBytesByStream(path, bytes);
-    }
-
-
     private void downImg() {
-        String dir = Environment.getExternalStorageDirectory().getPath() + "/" + "gsyVideo";
+        String dir = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + "gsyVideo";
         File file = new File(dir);
         if (!file.exists()) {
             boolean b = file.mkdirs();
