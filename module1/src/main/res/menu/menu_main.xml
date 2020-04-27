@@ -1,0 +1,50 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.module1.MainActivity">
+    <item
+        android:id="@+id/id"
+        android:icon="@drawable/ic_inbox_white"
+        android:orderInCategory="0"
+        android:title="id"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="1"
+        android:title="@string/action_settings"
+        app:showAsAction="withText">
+        <menu>
+            <item
+                android:id="@+id/a"
+                android:orderInCategory="0"
+                android:title="a"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/b"
+                android:icon="@mipmap/ic_launcher_round"
+                android:orderInCategory="1"
+                android:title="b"
+                app:showAsAction="never" />
+        </menu>
+    </item>
+    <group android:id="@+id/aa">
+        <item
+            android:id="@+id/a1"
+            android:orderInCategory="2"
+            android:title="a"
+            app:showAsAction="never" />
+        <item
+            android:id="@+id/b1"
+            android:icon="@mipmap/ic_launcher_round"
+            android:orderInCategory="3"
+            android:title="b"
+            app:showAsAction="never" />
+    </group>
+    <item
+        android:id="@+id/c"
+        android:icon="@mipmap/ic_launcher_round"
+        android:orderInCategory="3"
+        android:title="c"
+        app:showAsAction="never" />
+</menu>
