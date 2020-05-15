@@ -54,15 +54,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initToolbar() {
-//        Toolbar toolbar = findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar); //设置支toolbar
-//        toolbar.setNavigationIcon(R.drawable.ic_launcher_round);
-//        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(MainActivity.this, "啦啦啦", Toast.LENGTH_SHORT).show();
-//            }
-//        });
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar); //设置支toolbar
+        toolbar.setNavigationIcon(R.drawable.ic_launcher_round);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "啦啦啦", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
