@@ -53,8 +53,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize"
                 app:layout_collapseMode="pin"
-                app:title="默认标题"
                 app:navigationIcon="@mipmap/ic_launcher_round"
+                app:title="默认标题"
                 app:titleTextColor="@color/colorPrimaryDark">
 
                 <!--<TextView
@@ -93,11 +93,16 @@
 
     <!--        <include layout="@layout/content_main" />-->
 
+    <!--改变FloatingActionButton的背景颜色：
+    1、页面所使用的主题里面用的colorAccent颜色值
+    2、android:backgroundTint(会有colorAccent颜色值的边) 或 app:backgroundTint。同时使用时前者有效-->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"
+        app:backgroundTint="@color/colorPrimaryDark"
+
         app:layout_anchor="@id/app_bar"
         app:layout_anchorGravity="right|bottom|end"
         app:srcCompat="@android:drawable/ic_dialog_email" />
