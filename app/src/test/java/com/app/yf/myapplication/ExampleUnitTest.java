@@ -15,5 +15,10 @@ public class ExampleUnitTest {
         assertEquals(4, 2 + 2);
 
         System.out.println(333 / 0.0195);
+
+
+        System.out.println(Integer.toHexString((int) (255 * 0.65)));
+
+
     }
 }

@@ -7,37 +7,99 @@
     tools:context=".MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <!-- <androidx.appcompat.widget.Toolbar
+             android:id="@+id/toolbar"
+             android:layout_width="match_parent"
+             android:layout_height="?attr/actionBarSize"
+             android:background="?attr/colorPrimary"
+             app:elevation="8dp"
+             app:layout_scrollFlags="scroll|enterAlways"
+             app:navigationIcon="@mipmap/ic_launcher_round"
+             app:popupTheme="@style/AppTheme.PopupOverlay"
+             app:title="sadf"
+             app:titleTextColor="#000">
+
+             <TextView
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:layout_marginRight="16dp"
+                 android:gravity="center"
+                 android:text="标题" />
+         </androidx.appcompat.widget.Toolbar>-->
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:elevation="8dp"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/AppTheme.PopupOverlay">
+            android:layout_height="wrap_content"
+            app:contentScrim="@color/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_launcher_round" />
+
+
+            <!--这里标题栏要停在顶部的话，要用Toobar，不然会被滑出屏去；
+             这个属性值如果是用 parallax（视差），Toolbar的子布局也会被滑出屏去
+            app:layout_collapseMode="pin"
+            -->
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                app:layout_collapseMode="pin"
+                app:title="默认标题"
+                app:navigationIcon="@mipmap/ic_launcher_round"
+                app:titleTextColor="@color/colorPrimaryDark">
+
+                <!--<TextView
+               android:layout_width="wrap_content"
+               android:layout_height="?actionBarSize"
+               android:gravity="center"
+               android:text="标题"/>-->
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="悬停布局" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginRight="16dp"
-                android:gravity="center"
-                android:text="标题" />
+                android:text="你好吗"
+                android:textSize="260dp" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
-        </androidx.appcompat.widget.Toolbar>
-    </com.google.android.material.appbar.AppBarLayout>
 
-    <include layout="@layout/content_main" />
+    <!--        <include layout="@layout/content_main" />-->
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
+        app:layout_anchor="@id/app_bar"
+        app:layout_anchorGravity="right|bottom|end"
         app:srcCompat="@android:drawable/ic_dialog_email" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

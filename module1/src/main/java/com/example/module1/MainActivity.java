@@ -2,16 +2,21 @@ package com.example.module1;
 
 import android.os.Bundle;
 
+import com.example.module1.adapter.FirstFragmentAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,18 +34,35 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+
+
+//        initRecyclerView();
+
+    }
+
+    private void initRecyclerView() {
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        ArrayList<String> list = new ArrayList<>();
+        for (int i = 0; i < 150; i++) {
+            list.add("你好啊" + i);
+        }
+        recyclerView.setAdapter(new FirstFragmentAdapter(this, list));
     }
 
     private void initToolbar() {
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar); //设置支toolbar
-        toolbar.setNavigationIcon(R.drawable.ic_launcher_round);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "啦啦啦", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        Toolbar toolbar = findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar); //设置支toolbar
+//        toolbar.setNavigationIcon(R.drawable.ic_launcher_round);
+//        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(MainActivity.this, "啦啦啦", Toast.LENGTH_SHORT).show();
+//            }
+//        });
     }
 
     @Override
