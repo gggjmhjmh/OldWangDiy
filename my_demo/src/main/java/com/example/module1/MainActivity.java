@@ -1,5 +1,6 @@
 package com.example.module1;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import com.example.module1.adapter.FirstFragmentAdapter;
@@ -36,10 +37,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        //  获取当前模式
+        int currentNightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+
+
+
         //设置白天、黑夜模式
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-
+        recreate(); //重启activity
 
 //        initRecyclerView();
 
