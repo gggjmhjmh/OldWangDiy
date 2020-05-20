@@ -6,4 +6,17 @@
 
     <color name="tran">#00000000</color>
     <color name="bg_click_white">#40ffffff</color>
+
+<!--    白天模式转换前的背景颜色-->
+    <color name="bg_night_change">#131313</color>
+
+
+    <color name="bg_page_title">#f5f5f5</color>
+    <color name="bg_page">#f5f5f5</color>
+    <color name="top_line">#aaa</color>
+
+
+    <color name="text_title">#000</color>
+
+
 </resources>

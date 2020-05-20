@@ -1,14 +1,14 @@
-package com.example.module1;
+package com.example.my_demo;
 
-import android.content.res.Configuration;
+import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.module1.adapter.FirstFragmentAdapter;
+import com.example.my_demo.activity.NightModeSetActivity;
+import com.example.my_demo.adapter.FirstFragmentAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,33 +28,32 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initToolbar();
 
+        initFAbutton();
+    }
+
+    private void initFAbutton() {
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+                startActivity(new Intent(MainActivity.this, NightModeSetActivity.class));
             }
         });
+    }
 
-
-        //  获取当前模式
-        int currentNightMode = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
-
-
-
-        //设置白天、黑夜模式
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-        recreate(); //重启activity
-
-//        initRecyclerView();
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode ==1 && requestCode == 1){
+            //黑夜模式转换了
+//            ActivityCompat.recreate(MainActivity.this); //重启activity
+        }
     }
 
     private void initRecyclerView() {
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
-
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         ArrayList<String> list = new ArrayList<>();

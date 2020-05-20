@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.module1.MainActivity">
+    tools:context="com.example.my_demo.MainActivity">
     <item
         android:id="@+id/id"
         android:icon="@drawable/ic_inbox_white"

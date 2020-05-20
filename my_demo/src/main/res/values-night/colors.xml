@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#000</color>
+    <color name="colorPrimaryDark">#000</color>
+    <color name="colorAccent">#fff</color>
+
+    <color name="tran">#00000000</color>
+    <color name="bg_click_white">#40ffffff</color>
+
+    <!--    黑夜模式转换前的背景颜色-->
+    <color name="bg_night_change">#aaa</color>
+
+    <color name="bg_page_title">#000</color>
+    <color name="bg_page">#131313</color>
+    <color name="top_line">@color/bg_page_title</color>
+
+
+    <color name="text_title">#fff</color>
+
+
+</resources>

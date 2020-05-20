@@ -1,4 +1,4 @@
-package com.example.module1.adapter;
+package com.example.my_demo.adapter;
 
 import android.content.Context;
 import android.view.View;
