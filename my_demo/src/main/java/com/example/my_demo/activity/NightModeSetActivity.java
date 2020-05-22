@@ -12,6 +12,10 @@ import android.widget.Switch;
 import com.example.my_demo.R;
 
 /**
+ * Android夜间模式的实现方案：https://blog.csdn.net/qq_20521573/article/details/76222085
+ */
+
+/**
  * 夜间模式设置页面
  */
 public class NightModeSetActivity extends AppCompatActivity {
