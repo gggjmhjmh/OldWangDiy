@@ -26,7 +26,6 @@ public class ThreeActivity extends AppCompatActivity {
             public void onClick(View v) {
 //                finishAfterTransition();
                 supportFinishAfterTransition();
-                ActivityCompat.finishAfterTransition(ThreeActivity.this);
             }
         });
 
