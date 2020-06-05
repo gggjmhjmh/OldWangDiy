@@ -1,6 +1,7 @@
 package com.app.yf.myapplication.view.activity;
 
 import android.Manifest;
+import android.animation.Animator;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -12,6 +13,9 @@ import android.os.Environment;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewAnimationUtils;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -76,7 +80,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 //                target.setTranslationX(300f);
-                target.setRotation(target.getRotation() + 45);
+//                target.setRotation(target.getRotation() + 45);
+
+//                Animation animation = new RotateAnimation(-30,30,(int)target.getPivotX(),(int)target.getPivotY());
+                Animation animation = new RotateAnimation(-30,30,(int)target.getPivotX(),0);
+                animation.setDuration(500);
+                animation.setRepeatMode(Animation.REVERSE);
+                animation.setRepeatCount(-1);
+
+                target.startAnimation(animation);
+//                animation.start();
+
+//                Animator animator = ViewAnimationUtils.createCircularReveal(target,(int)target.getPivotX(),(int)target.getPivotY(),0f,800f);
+//                animator.start();
             }
         });
         target.setOnTouchListener(new TouchUtils.OnTouchUtilsListener() {
