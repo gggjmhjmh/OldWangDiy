@@ -32,6 +32,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
 }
 
 dependencies {
@@ -64,6 +69,8 @@ dependencies {
     implementation 'com.shuyu:GSYVideoPlayer:7.1.2'
 
     implementation 'com.blankj:utilcodex:1.26.0'
+
+    implementation 'cn.jzvd:jiaozivideoplayer:7.4.1'
 
 }
 

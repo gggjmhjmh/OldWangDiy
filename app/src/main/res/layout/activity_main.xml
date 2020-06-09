@@ -42,5 +42,19 @@
         tools:layout_editor_absoluteY="294dp" />
 
 
+    <LinearLayout
+        app:layout_constraintRight_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:orientation="vertical"
+        android:layout_marginTop="520dp">
+
+        <cn.jzvd.JzvdStd
+            android:id="@+id/lcoal_path"
+            android:layout_width="match_parent"
+            android:layout_height="200dp" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

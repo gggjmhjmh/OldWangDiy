@@ -44,6 +44,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import cn.jzvd.JzvdStd;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
@@ -52,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
     private GSYADVideoPlayer ADVideoPlayer;
     private OrientationUtils orientationUtils;
     private StandardGSYVideoPlayer videoPlayer;
+
+    private JzvdStd jzvdLocalPath;
 
     @SuppressLint("WrongThread")
     @Override
@@ -62,16 +66,34 @@ public class MainActivity extends AppCompatActivity {
 //        okgo();
 
 
-        ADVideoPlayer = findViewById(R.id.ad_player);
-        videoPlayer = findViewById(R.id.player);
-        gsyVideo();
+//        ADVideoPlayer = findViewById(R.id.ad_player);
+//        videoPlayer = findViewById(R.id.player);
+//        gsyVideo();
 
 
 //        downImg();
-        loadImg();  //加载gzip压缩过的图片
+//        loadImg();  //加载gzip压缩过的图片
 
 
-        test();
+//        test();
+
+        jiaoZi();
+    }
+
+    private void jiaoZi() {
+
+        //checkPermission
+        int permission = ActivityCompat.checkSelfPermission(this, "android.permission.WRITE_EXTERNAL_STORAGE");
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{
+                    "android.permission.READ_EXTERNAL_STORAGE",
+                    "android.permission.WRITE_EXTERNAL_STORAGE"}, 1);
+        }
+
+        jzvdLocalPath = findViewById(R.id.lcoal_path);
+
+        String localVideoPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/aaa/local_video.mp4";
+        jzvdLocalPath.setUp(localVideoPath, "Play Local Video");
     }
 
 
@@ -369,13 +391,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        videoPlayer.onVideoPause();
+//        videoPlayer.onVideoPause();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        videoPlayer.onVideoResume();
+//        videoPlayer.onVideoResume();
     }
 
     @Override
