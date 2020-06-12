@@ -94,6 +94,8 @@ public class MainActivity extends AppCompatActivity {
 
         String localVideoPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/aaa/local_video.mp4";
         jzvdLocalPath.setUp(localVideoPath, "Play Local Video");
+        jzvdLocalPath.fullscreenButton.performClick();  //全屏
+        jzvdLocalPath.startButton.performClick();  //播放
     }
 
 
