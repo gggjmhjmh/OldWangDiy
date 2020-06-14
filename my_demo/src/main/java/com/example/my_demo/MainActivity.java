@@ -3,6 +3,7 @@ package com.example.my_demo;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.my_demo.activity.LetterIndexActivity;
 import com.example.my_demo.activity.NightModeSetActivity;
 import com.example.my_demo.adapter.FirstFragmentAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -113,5 +114,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void doClick(View view) {
+        switch (view.getId()) {
+            case R.id.one:
+                startActivity(new Intent(this, LetterIndexActivity.class));
+                break;
+        }
+
     }
 }
