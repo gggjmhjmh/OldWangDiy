@@ -1,4 +1,4 @@
-package com.example.my_demo.diy;
+package com.example.librarymodule.diy;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -14,7 +14,12 @@ import androidx.annotation.Nullable;
 
 import com.blankj.utilcode.util.SizeUtils;
 
-public class LetterIndex extends View {
+/**
+ * OldWang
+ * 字母索引控件
+ * 2020/6/15
+ */
+public class LetterIndexView extends View {
 
     private Paint mPaint;
     private TextView bindTextView; //显示字母的tv
@@ -30,12 +35,12 @@ public class LetterIndex extends View {
     private int selectPostion; //选中的下标
     private int singleTextHeight; //单个text的高度
 
-    public LetterIndex(Context context) {
+    public LetterIndexView(Context context) {
         super(context);
         init();
     }
 
-    public LetterIndex(Context context, @Nullable AttributeSet attrs) {
+    public LetterIndexView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init();
     }

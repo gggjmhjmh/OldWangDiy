@@ -16,7 +16,12 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
-public class MyCircleProgessView extends View {
+/**
+ * OldWang
+ * 彩色圆形进度条
+ * 2020/6/15
+ */
+public class CircleProgessView extends View {
     private static final String TAG = "MyView";
     private Context context;
 
@@ -33,8 +38,7 @@ public class MyCircleProgessView extends View {
 
     private int textColor = Color.BLUE;  //文字颜色
     private int circleColor = Color.GRAY; //圆的颜色
-    private int progessColor = Color.GREEN; //进度颜色
-    private int[] progessColors; //进度值的渐变颜色
+    private int[] progessColors = {Color.GREEN}; //进度值的渐变颜色
 
     private boolean isRound = true; //端点是否为圆头
 
@@ -52,39 +56,30 @@ public class MyCircleProgessView extends View {
      *
      * @param textSize
      */
-    public void setTextSize(int textSize) {
+    public CircleProgessView setTextSize(int textSize) {
         this.textSize = dip2px(context, textSize);
+        return this;
     }
 
-    public void setTextColor(int textColor) {
-        setColor(textColor, circleColor, progessColor);
-    }
-
-    public void setCircleColor(int circleColor) {
-        setColor(textColor, circleColor, progessColor);
-    }
-
-    public void setProgessColor(int progessColor) {
-        setColor(textColor, circleColor, progessColor);
-    }
-
-    public void setColor(int textColor, int circleColor, int progessColor) {
+    public CircleProgessView setTextColor(int textColor) {
         this.textColor = textColor;
-        this.circleColor = circleColor;
-        this.progessColor = progessColor;
-//        invalidate();
+        return this;
     }
 
+    public CircleProgessView setCircleColor(int circleColor) {
+        this.circleColor = circleColor;
+        return this;
+    }
 
     /**
      * 设置进度值渐变颜色
      *
-     * @param progessColors 颜色数组
      * @param isRound       端点是否为圆头, 注：为圆头时，起点的圆头是结尾的颜色。开始和结束的颜色设为一样的就没问题
+     * @param progessColors 颜色数组
      */
-    public void setProgessColor(int[] progessColors, boolean isRound) {
-        this.progessColors = progessColors;
+    public void setProgessColor(boolean isRound, int... progessColors) {
         this.isRound = isRound;
+        this.progessColors = progessColors;
     }
 
     /**
@@ -134,12 +129,12 @@ public class MyCircleProgessView extends View {
     }
 
 
-    public MyCircleProgessView(Context context) {
+    public CircleProgessView(Context context) {
         super(context);
         init(context);
     }
 
-    public MyCircleProgessView(Context context, @Nullable AttributeSet attrs) {
+    public CircleProgessView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init(context);
     }
@@ -216,20 +211,25 @@ public class MyCircleProgessView extends View {
 
         mPaint.setStyle(Paint.Style.STROKE); //设置空心
         mPaint.setStrokeWidth(strokeWidth); //设置笔画宽度
-        mPaint.setColor(progessColor);
-        //如果设置了渐变
-        if (progessColors != null) {
-            //设置着色器，画渐变
-            Shader sweepGradient = new SweepGradient(circleSize / 2f, circleSize / 2f, progessColors, null);
 
-            //设置起始位置旋转90度
-            Matrix matrix = new Matrix();
-            matrix.setRotate(90, circleSize / 2, circleSize / 2);
-            sweepGradient.setLocalMatrix(matrix);
+        if (progessColors != null && progessColors.length > 0) {
+            //如果是单色
+            if (progessColors.length == 1) {
+                mPaint.setColor(progessColors[0]);
+            }
+            //如果是多色（渐变）
+            else {
+                //设置着色器，画渐变
+                Shader sweepGradient = new SweepGradient(circleSize / 2f, circleSize / 2f, progessColors, null);
 
-            mPaint.setShader(sweepGradient);
+                //设置起始位置旋转90度
+                Matrix matrix = new Matrix();
+                matrix.setRotate(90, circleSize / 2, circleSize / 2);
+                sweepGradient.setLocalMatrix(matrix);
+
+                mPaint.setShader(sweepGradient);
+            }
         }
-
         //设置端点是否为圆头
         mPaint.setStrokeCap(isRound ? Paint.Cap.ROUND : Paint.Cap.BUTT);
 

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.example.my_demo.activity.LetterIndexActivity">
 
-    <com.example.my_demo.diy.LetterIndex
+    <com.example.librarymodule.diy.LetterIndexView
         android:id="@+id/letterIndex"
         android:layout_width="30dp"
         android:layout_height="match_parent"
