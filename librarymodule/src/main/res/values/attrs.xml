@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="LetterIndexView">
+        <attr name="text_size" format="integer"/>
+        <attr name="select_text_color" format="color"/>
+        <attr name="unselect_text_color" format="color"/>
+        <attr name="bg_color" format="color"/>
+
+        <!--        设置枚举的方法-->
+        <!-- <attr name="sex" format="enum">
+             <enum name="man" value="0"/>
+             <enum name="woman" value="1"/>
+         </attr>-->
+    </declare-styleable>
+
+</resources>

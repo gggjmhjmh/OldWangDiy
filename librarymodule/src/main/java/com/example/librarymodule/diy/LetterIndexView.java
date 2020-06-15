@@ -1,6 +1,7 @@
 package com.example.librarymodule.diy;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.blankj.utilcode.util.SizeUtils;
+import com.example.librarymodule.R;
 
 /**
  * OldWang
@@ -23,7 +25,6 @@ public class LetterIndexView extends View {
 
     private Paint mPaint;
     private TextView bindTextView; //显示字母的tv
-    private int textSize = 15; //文字大小 sp
 
     private String[] letters = {"A", "B", "C", "D",
             "E", "F", "G", "H", "I", "J", "K",
@@ -35,6 +36,12 @@ public class LetterIndexView extends View {
     private int selectPostion; //选中的下标
     private int singleTextHeight; //单个text的高度
 
+
+    private int textSize = 45; //文字大小 px
+    private int select_text_color; //选中的文字颜色
+    private int unselect_text_color; //未选中的文字颜色
+    private int bg_color; //背景颜色
+
     public LetterIndexView(Context context) {
         super(context);
         init();
@@ -43,15 +50,20 @@ public class LetterIndexView extends View {
     public LetterIndexView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         init();
+
+        TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.LetterIndexView);
+        textSize = array.getInt(R.styleable.LetterIndexView_text_size, SizeUtils.sp2px(15));
+        select_text_color = array.getColor(R.styleable.LetterIndexView_select_text_color, Color.RED);
+        unselect_text_color = array.getColor(R.styleable.LetterIndexView_unselect_text_color, Color.BLACK);
+        bg_color = array.getColor(R.styleable.LetterIndexView_bg_color, Color.parseColor("#cccccccc"));
+
     }
 
     public void init() {
         mPaint = new Paint();
-        mPaint.setTextSize(SizeUtils.sp2px(textSize));
+        mPaint.setTextSize(textSize);
         mPaint.setStrokeWidth(1);
-
     }
-
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
@@ -86,13 +98,14 @@ public class LetterIndexView extends View {
 
     }
 
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         canvas.save();
 
         for (int i = 0; i < letters.length; i++) {
-            mPaint.setColor(i == selectPostion ? Color.RED : Color.BLACK);
+            mPaint.setColor(i == selectPostion ? select_text_color : unselect_text_color);
 
             Rect mBounds = new Rect();
             mPaint.getTextBounds(letters[i], 0, 1, mBounds);
@@ -113,7 +126,7 @@ public class LetterIndexView extends View {
             case MotionEvent.ACTION_DOWN:
             case MotionEvent.ACTION_MOVE:
 
-                setBackgroundColor(Color.parseColor("#cccccccc"));
+                setBackgroundColor(bg_color);
                 selectPostion = (int) ((event.getY() - getPaddingTop()) / singleTextHeight);
                 if (selectPostion < 0) {
                     selectPostion = 0;
