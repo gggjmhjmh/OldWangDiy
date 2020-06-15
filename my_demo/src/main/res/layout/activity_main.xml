@@ -90,12 +90,20 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/one"
+                android:id="@+id/letterIndex"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:onClick="doClick"
                 android:text="自定义首字母索引控件" />
+
+            <Button
+                android:id="@+id/circleProgess"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:onClick="doClick"
+                android:text="圆形彩色进度条" />
 
             <TextView
                 android:layout_width="match_parent"

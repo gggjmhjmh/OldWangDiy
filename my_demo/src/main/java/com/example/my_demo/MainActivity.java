@@ -3,6 +3,7 @@ package com.example.my_demo;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.my_demo.activity.CircleProgessActivity;
 import com.example.my_demo.activity.LetterIndexActivity;
 import com.example.my_demo.activity.NightModeSetActivity;
 import com.example.my_demo.adapter.FirstFragmentAdapter;
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode ==1 && requestCode == 1){
+        if (requestCode == 1 && requestCode == 1) {
             //黑夜模式转换了
 //            ActivityCompat.recreate(MainActivity.this); //重启activity
         }
@@ -118,8 +119,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void doClick(View view) {
         switch (view.getId()) {
-            case R.id.one:
+            case R.id.letterIndex:
                 startActivity(new Intent(this, LetterIndexActivity.class));
+                break;
+            case R.id.circleProgess:
+                startActivity(new Intent(this, CircleProgessActivity.class));
                 break;
         }
 

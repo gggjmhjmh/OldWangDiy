@@ -77,9 +77,10 @@ public class CircleProgessView extends View {
      * @param isRound       端点是否为圆头, 注：为圆头时，起点的圆头是结尾的颜色。开始和结束的颜色设为一样的就没问题
      * @param progessColors 颜色数组
      */
-    public void setProgessColor(boolean isRound, int... progessColors) {
+    public CircleProgessView setProgessColor(boolean isRound, int... progessColors) {
         this.isRound = isRound;
         this.progessColors = progessColors;
+        return this;
     }
 
     /**
@@ -159,7 +160,7 @@ public class CircleProgessView extends View {
         drawCirclePaint.setStyle(Paint.Style.STROKE); //设置空心
         drawCirclePaint.setStrokeWidth(strokeWidth); //设置笔画宽度
         drawCirclePaint.setColor(circleColor); //设置颜色
-        setShadow(2, 1, 2, Color.RED); //设置阴影
+        setShadow(2, 0, 0, Color.RED); //设置阴影
     }
 
 
