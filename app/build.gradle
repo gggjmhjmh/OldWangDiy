@@ -71,6 +71,7 @@ dependencies {
     implementation 'com.blankj:utilcodex:1.26.0'
 
     implementation 'cn.jzvd:jiaozivideoplayer:7.4.1'
+    implementation project(path: ':librarymodule')
 
 }
 
