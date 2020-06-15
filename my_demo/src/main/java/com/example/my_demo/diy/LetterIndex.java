@@ -94,7 +94,7 @@ public class LetterIndex extends View {
             float textWidth = mBounds.width();
             float textHeight = mBounds.height();
             float x = getWidth() / 2 - textWidth / 2;
-            float y = singleTextHeight * (i + 1) + getPaddingTop() - textHeight / 2;
+            float y = singleTextHeight * (i + 1) - singleTextHeight / 2 + textHeight / 2 + getPaddingTop();
 
             canvas.drawText(letters[i], x, y, mPaint);
         }
