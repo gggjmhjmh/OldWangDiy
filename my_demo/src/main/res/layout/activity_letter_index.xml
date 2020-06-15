@@ -8,13 +8,17 @@
 
     <com.example.librarymodule.diy.LetterIndexView
         android:id="@+id/letterIndex"
-        android:layout_width="30dp"
+        android:layout_width="35dp"
         android:layout_height="match_parent"
         android:background="#cccccccc"
         android:paddingTop="15dp"
         android:paddingBottom="20dp"
+        app:bg_color="@color/colorAccent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:select_text_color="#E61A5F"
+        app:text_size="20sp"
+        app:unselect_text_color="#333" />
 
     <TextView
         android:id="@+id/textView_letter"

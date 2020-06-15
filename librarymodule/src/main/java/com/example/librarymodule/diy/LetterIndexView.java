@@ -37,7 +37,7 @@ public class LetterIndexView extends View {
     private int singleTextHeight; //单个text的高度
 
 
-    private int textSize = 45; //文字大小 px
+    private int textSize; //文字大小 px
     private int select_text_color; //选中的文字颜色
     private int unselect_text_color; //未选中的文字颜色
     private int bg_color; //背景颜色
@@ -49,14 +49,13 @@ public class LetterIndexView extends View {
 
     public LetterIndexView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        init();
-
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.LetterIndexView);
-        textSize = array.getInt(R.styleable.LetterIndexView_text_size, SizeUtils.sp2px(15));
+        textSize = (int) array.getDimension(R.styleable.LetterIndexView_text_size, (float) SizeUtils.sp2px(15));
         select_text_color = array.getColor(R.styleable.LetterIndexView_select_text_color, Color.RED);
         unselect_text_color = array.getColor(R.styleable.LetterIndexView_unselect_text_color, Color.BLACK);
         bg_color = array.getColor(R.styleable.LetterIndexView_bg_color, Color.parseColor("#cccccccc"));
 
+        init();
     }
 
     public void init() {
