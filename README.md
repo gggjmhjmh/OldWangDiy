@@ -31,7 +31,7 @@ xml:
 java:
 
         CircleProgessView circleProgess = findViewById(R.id.circleProgessView);
-        //文字颜色可传一个或多个，不传时默认为文字颜色
+        //进度条颜色可传一个或多个，不传时默认为文字颜色
         circleProgess.setProgessColor(true, Color.GREEN, Color.RED, Color.BLUE, Color.GREEN)
                 .setShadow(10, 5, 5, Color.GRAY)
                 .setStrokeWidth(20)
