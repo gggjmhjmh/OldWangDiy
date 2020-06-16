@@ -22,12 +22,12 @@ How use ?
 ####圆形彩色进度条：
 
 xml:
-
+```
   <com.example.librarymodule.diy.CircleProgessView
         android:id="@+id/circleProgessView"
         android:layout_width="300dp"
         android:layout_height="300dp"/>
-
+```
 java:
 
         CircleProgessView circleProgess = findViewById(R.id.circleProgessView);
@@ -42,6 +42,7 @@ java:
 
 xml:
 
+```
   //自定义属性：背景颜色、选中的文字颜色，未选中的文字颜色、文字大小
    <com.example.librarymodule.diy.LetterIndexView
         android:id="@+id/letterIndex"
@@ -73,9 +74,9 @@ xml:
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
+```
 java:
-
+```
 LetterIndexView letterIndex = findViewById(R.id.letterIndex);
         letterIndex.bindTextView((TextView) findViewById(R.id.textView_letter));
 
@@ -86,3 +87,4 @@ LetterIndexView letterIndex = findViewById(R.id.letterIndex);
 
             }
         });
+```
