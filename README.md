@@ -17,7 +17,7 @@ Step 2. Add the dependency
 	}
 
 
-### How use ?
+## How use ?
 
 #### 圆形彩色进度条：
 
