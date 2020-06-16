@@ -21,13 +21,15 @@ How use ?
 
 ####圆形彩色进度条：
 
-//xml:
+xml:
+
   <com.example.librarymodule.diy.CircleProgessView
         android:id="@+id/circleProgessView"
         android:layout_width="300dp"
         android:layout_height="300dp"/>
 
-//java:
+java:
+
         CircleProgessView circleProgess = findViewById(R.id.circleProgessView);
         //文字颜色可传一个或多个，不传时默认为文字颜色
         circleProgess.setProgessColor(true, Color.GREEN, Color.RED, Color.BLUE, Color.GREEN)
@@ -38,7 +40,8 @@ How use ?
 
 ####首字母索引：
 
-//xml:
+xml:
+
    <com.example.librarymodule.diy.LetterIndexView
         android:id="@+id/letterIndex"
         android:layout_width="35dp"
@@ -71,7 +74,8 @@ How use ?
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-//java:
+java:
+
 LetterIndexView letterIndex = findViewById(R.id.letterIndex);
         letterIndex.bindTextView((TextView) findViewById(R.id.textView_letter));
 
