@@ -17,9 +17,9 @@ Step 2. Add the dependency
 	}
 
 
-##How use ?
+### How use ?
 
-###圆形彩色进度条：
+#### 圆形彩色进度条：
 
 xml:
 ```
@@ -38,7 +38,7 @@ java:
                 .setProgressAnimation(80, 500);
 
 
-###首字母索引：
+#### 首字母索引：
 
 xml:
 
