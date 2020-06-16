@@ -3,6 +3,7 @@ package com.example.my_demo.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.example.librarymodule.diy.LetterIndexView;
@@ -20,9 +21,9 @@ public class LetterIndexActivity extends AppCompatActivity {
         letterIndex.setOnSelectLinstener(new LetterIndexView.OnSelectLinstener() {
             @Override
             public void onSelcet(int SelectPostion, String selctStr) {
-
+                Log.i("LetterIndexActivity", "onSelcet: " + selctStr);
             }
         });
-        
+
     }
 }

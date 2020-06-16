@@ -123,15 +123,32 @@ public class LetterIndexView extends View {
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-            case MotionEvent.ACTION_MOVE:
-
                 setBackgroundColor(bg_color);
-                selectPostion = (int) ((event.getY() - getPaddingTop()) / singleTextHeight);
-                if (selectPostion < 0) {
-                    selectPostion = 0;
-                } else if (selectPostion >= letters.length) {
-                    selectPostion = letters.length - 1;
+            case MotionEvent.ACTION_MOVE:
+                //当前移动到的下标
+                int currPostion = (int) ((event.getY() - getPaddingTop()) / singleTextHeight);
+                if (currPostion < 0) { //超出上边
+                    currPostion = 0;
+                } else if (currPostion >= letters.length) { //超出下边
+                    currPostion = letters.length - 1;
                 }
+                //如果当前触摸到的索引还是上次触摸到的(选中的)
+                if (selectPostion == currPostion) {
+                    //如果是按下
+                    if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                        if (bindTextView != null) {
+                            bindTextView.setVisibility(VISIBLE);
+                            bindTextView.setText(letters[selectPostion]);
+                        }
+                        if (onSelectLinstener != null) {
+                            onSelectLinstener.onSelcet(selectPostion, letters[selectPostion]);
+                        }
+                    }
+                    //防止重复绘制和重复回调
+                    break;
+                }
+
+                selectPostion = currPostion;
                 invalidate();
 
                 if (bindTextView != null) {
