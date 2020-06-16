@@ -88,8 +88,9 @@ public class CircleProgessView extends View {
      *
      * @param strokeWidth dp
      */
-    public void setStrokeWidth(int strokeWidth) {
+    public CircleProgessView setStrokeWidth(int strokeWidth) {
         this.strokeWidth = dip2px(context, strokeWidth);
+        return this;
     }
 
     private int shadowWidth = 15; //阴影一边所占的宽度 px
@@ -102,10 +103,11 @@ public class CircleProgessView extends View {
      * @param dy          偏移y  dp
      * @param shadowColor 阴影颜色
      */
-    public void setShadow(float radius, float dx, float dy, int shadowColor) {
+    public CircleProgessView setShadow(float radius, float dx, float dy, int shadowColor) {
         drawCirclePaint.setShadowLayer(dip2px(context, radius), dip2px(context, dx), dip2px(context, dy), shadowColor);
-        //阴影所一边所占的宽度 = 模糊半径 + 模糊半径/2 + x与y的偏移最大值
+        //阴影一边所占的宽度 = 模糊半径 + 模糊半径/2 + x与y的偏移最大值
         shadowWidth = dip2px(context, radius + radius / 2 + Math.max(dx, dy));
+        return this;
     }
 
     public float getProgress() {
@@ -158,8 +160,6 @@ public class CircleProgessView extends View {
         drawCirclePaint = new Paint();
         drawCirclePaint.setAntiAlias(true);
         drawCirclePaint.setStyle(Paint.Style.STROKE); //设置空心
-        drawCirclePaint.setStrokeWidth(strokeWidth); //设置笔画宽度
-        drawCirclePaint.setColor(circleColor); //设置颜色
         setShadow(2, 0, 0, Color.RED); //设置阴影
     }
 
@@ -207,6 +207,8 @@ public class CircleProgessView extends View {
         canvas.drawText((int) progress + "%", circleSize / 2, circleSize / 2 + y, mPaint);
 
         //画进度条底部圆
+        drawCirclePaint.setStrokeWidth(strokeWidth); //设置笔画宽度
+        drawCirclePaint.setColor(circleColor); //设置颜色
         canvas.drawCircle(circleSize / 2, circleSize / 2, circleSize / 2 - strokeWidth / 2 - shadowWidth, drawCirclePaint);
         /* - strokeWidth / 2  画的线为内边距效果,不然一半的线宽就越出范围了 */
 

@@ -19,8 +19,8 @@
 
     <com.example.librarymodule.diy.CircleProgessView
         android:id="@+id/circleProgessView"
-        android:layout_width="180dp"
-        android:layout_height="180dp"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

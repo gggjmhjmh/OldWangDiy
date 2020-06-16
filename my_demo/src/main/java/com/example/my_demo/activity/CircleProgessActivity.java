@@ -18,7 +18,9 @@ public class CircleProgessActivity extends AppCompatActivity {
 
         final CircleProgessView circleProgess = findViewById(R.id.circleProgessView);
 
-        circleProgess.setProgessColor(true, Color.GREEN)
+        circleProgess.setProgessColor(true, Color.GREEN, Color.RED, Color.BLUE, Color.GREEN)
+                .setShadow(10, 5, 5, Color.GRAY)
+                .setStrokeWidth(20)
                 .setProgressAnimation(80, 500);
 
         circleProgess.setOnClickListener(new View.OnClickListener() {
