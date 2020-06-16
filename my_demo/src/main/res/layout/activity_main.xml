@@ -118,8 +118,8 @@
     <!--        <include layout="@layout/content_main" />-->
 
     <!--改变FloatingActionButton的背景颜色：
-    1、页面所使用的主题里面用的colorAccent颜色值
-    2、android:backgroundTint(会有colorAccent颜色值的边) 或 app:backgroundTint。同时使用时前者有效-->
+    方式1、页面所使用的主题里面用的colorAccent颜色值
+    方式2、android:backgroundTint(会有colorAccent颜色值的边) 或 app:backgroundTint。同时使用时前者有效-->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
