@@ -42,6 +42,7 @@ java:
 
 xml:
 
+  //自定义属性：背景颜色、选中的文字颜色，未选中的文字颜色、文字大小
    <com.example.librarymodule.diy.LetterIndexView
         android:id="@+id/letterIndex"
         android:layout_width="35dp"
@@ -54,7 +55,6 @@ xml:
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
 
-        //自定义属性：背景颜色、选中的文字颜色，未选中的文字颜色、文字大小
         app:bg_color="@color/colorAccent"
         app:select_text_color="#E61A5F"
         app:unselect_text_color="#666"
