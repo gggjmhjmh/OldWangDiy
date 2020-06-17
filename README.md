@@ -23,7 +23,7 @@ Step 2. Add the dependency
 
 xml:
 ```
-  <com.example.librarymodule.diy.CircleProgessView
+  <com.oldwang.librarymodule.diy.CircleProgessView
         android:id="@+id/circleProgessView"
         android:layout_width="300dp"
         android:layout_height="300dp"/>
@@ -44,7 +44,7 @@ xml:
 
 ```
   //自定义属性：背景颜色、选中的文字颜色，未选中的文字颜色、文字大小
-   <com.example.librarymodule.diy.LetterIndexView
+   <com.oldwang.librarymodule.diy.LetterIndexView
         android:id="@+id/letterIndex"
         android:layout_width="35dp"
         android:layout_height="match_parent"
