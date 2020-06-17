@@ -14,12 +14,19 @@
 
         <ImageView
             android:id="@+id/iv"
-            android:layout_width="20dp"
-            android:layout_height="190dp"
-            android:layout_marginLeft="180dp"
-            android:background="@color/colorAccent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/colorAccent" />
+
+        <ProgressBar
+            style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="6dp"
+            android:progress="60"
+            android:layout_margin="5dp"
+            android:progressDrawable="@drawable/progress_drawable"
+            android:secondaryProgress="80" />
 
     </LinearLayout>
 
@@ -35,7 +42,7 @@
         android:id="@+id/ad_player"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="200dp"
         android:visibility="visible"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="16dp"
@@ -43,18 +50,17 @@
 
 
     <LinearLayout
-        app:layout_constraintRight_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
         android:layout_height="200dp"
+        android:layout_marginTop="5dp"
         android:orientation="vertical"
-        android:layout_marginTop="520dp">
+        app:layout_constraintRight_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ad_player">
 
         <cn.jzvd.JzvdStd
             android:id="@+id/lcoal_path"
             android:layout_width="match_parent"
             android:layout_height="200dp" />
-
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

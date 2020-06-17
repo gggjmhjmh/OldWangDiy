@@ -3,11 +3,7 @@ package com.app.yf.myapplication.view.activity;
 import android.Manifest;
 import android.animation.Animator;
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -15,13 +11,14 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.app.yf.myapplication.R;
 import com.blankj.utilcode.util.FileIOUtils;
-import com.blankj.utilcode.util.ImageUtils;
 import com.blankj.utilcode.util.TouchUtils;
 import com.bumptech.glide.Glide;
 import com.lzy.okgo.OkGo;
@@ -49,6 +46,7 @@ import cn.jzvd.JzvdStd;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
+
     private ImageView target;
 
     private GSYADVideoPlayer ADVideoPlayer;
@@ -63,21 +61,25 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         target = findViewById(R.id.iv);
-//        okgo();
 
+        test();
+
+//        okgo();
 
 //        ADVideoPlayer = findViewById(R.id.ad_player);
 //        videoPlayer = findViewById(R.id.player);
 //        gsyVideo();
 
-
 //        downImg();
 //        loadImg();  //加载gzip压缩过的图片
 
+//        jiaoZi();
+    }
 
-//        test();
 
-        jiaoZi();
+    private void test() {
+
+
     }
 
     private void jiaoZi() {
@@ -91,59 +93,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
         jzvdLocalPath = findViewById(R.id.lcoal_path);
-
+        //播放本地sd视频文件
         String localVideoPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/aaa/local_video.mp4";
         jzvdLocalPath.setUp(localVideoPath, "Play Local Video");
         jzvdLocalPath.fullscreenButton.performClick();  //全屏
         jzvdLocalPath.startButton.performClick();  //播放
-    }
-
-
-    private void test() {
-        target.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                target.setTranslationX(300f);
-//                target.setRotation(target.getRotation() + 45);
-
-//                Animation animation = new RotateAnimation(-30,30,(int)target.getPivotX(),(int)target.getPivotY());
-                Animation animation = new RotateAnimation(-30,30,(int)target.getPivotX(),0);
-                animation.setDuration(500);
-                animation.setRepeatMode(Animation.REVERSE);
-                animation.setRepeatCount(-1);
-
-                target.startAnimation(animation);
-//                animation.start();
-
-//                Animator animator = ViewAnimationUtils.createCircularReveal(target,(int)target.getPivotX(),(int)target.getPivotY(),0f,800f);
-//                animator.start();
-            }
-        });
-        target.setOnTouchListener(new TouchUtils.OnTouchUtilsListener() {
-
-            @Override
-            public boolean onDown(View view, int x, int y, MotionEvent event) {
-                return true;
-            }
-
-            @Override
-            public boolean onMove(View view, int direction, int x, int y, int dx, int dy, int totalX, int totalY, MotionEvent event) {
-                //自己的位置+相对上一次所移动的位置
-                target.setX(target.getX() + dx);
-                target.setY(target.getY() + dy);
-                //或
-//                target.setTranslationX(target.getTranslationX() + dx);
-//                target.setTranslationY(target.getTranslationY() + dy);
-
-//                target.requestLayout();
-                return true;
-            }
-
-            @Override
-            public boolean onStop(View view, int direction, int x, int y, int totalX, int totalY, int vx, int vy, MotionEvent event) {
-                return true;
-            }
-        });
     }
 
 
