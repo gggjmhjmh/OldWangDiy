@@ -1,4 +1,4 @@
-package com.example.librarymodule.diy;
+package com.oldwang.librarymodule.diy;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -14,7 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.blankj.utilcode.util.SizeUtils;
-import com.example.librarymodule.R;
+import com.oldwang.librarymodule.R;
 
 /**
  * OldWang

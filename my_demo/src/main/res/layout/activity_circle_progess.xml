@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.my_demo.activity.LetterIndexActivity">
+    tools:context="com.oldwang.my_demo.activity.LetterIndexActivity">
 
     <TextView
         android:id="@+id/title"
@@ -17,7 +17,7 @@
         android:textSize="16dp"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.example.librarymodule.diy.CircleProgessView
+    <com.oldwang.librarymodule.diy.CircleProgessView
         android:id="@+id/circleProgessView"
         android:layout_width="300dp"
         android:layout_height="300dp"

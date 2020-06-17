@@ -1,4 +1,4 @@
-package com.example.my_demo;
+package com.oldwang.my_demo;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

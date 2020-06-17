@@ -1,4 +1,4 @@
-package com.example.my_demo.activity;
+package com.oldwang.my_demo.activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -6,8 +6,8 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.librarymodule.diy.CircleProgessView;
-import com.example.my_demo.R;
+import com.oldwang.librarymodule.diy.CircleProgessView;
+import com.oldwang.my_demo.R;
 
 public class CircleProgessActivity extends AppCompatActivity {
 

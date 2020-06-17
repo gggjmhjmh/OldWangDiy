@@ -1,4 +1,4 @@
-package com.example.my_demo.activity;
+package com.oldwang.my_demo.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,8 +6,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
-import com.example.librarymodule.diy.LetterIndexView;
-import com.example.my_demo.R;
+import com.oldwang.librarymodule.diy.LetterIndexView;
+import com.oldwang.my_demo.R;
 
 public class LetterIndexActivity extends AppCompatActivity {
 

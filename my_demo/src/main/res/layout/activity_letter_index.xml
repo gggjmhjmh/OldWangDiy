@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.my_demo.activity.LetterIndexActivity">
+    tools:context="com.oldwang.my_demo.activity.LetterIndexActivity">
 
 
     <TextView
@@ -18,7 +18,7 @@
         android:background="#CCCCCCCC"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.example.librarymodule.diy.LetterIndexView
+    <com.oldwang.librarymodule.diy.LetterIndexView
         android:id="@+id/letterIndex"
         android:layout_width="35dp"
         android:layout_height="match_parent"

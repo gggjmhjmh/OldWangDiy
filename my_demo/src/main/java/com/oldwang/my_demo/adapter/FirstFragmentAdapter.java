@@ -1,4 +1,4 @@
-package com.example.my_demo.adapter;
+package com.oldwang.my_demo.adapter;
 
 import android.content.Context;
 import android.view.View;

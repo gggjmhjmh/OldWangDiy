@@ -1,12 +1,12 @@
-package com.example.my_demo;
+package com.oldwang.my_demo;
 
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.example.my_demo.activity.CircleProgessActivity;
-import com.example.my_demo.activity.LetterIndexActivity;
-import com.example.my_demo.activity.NightModeSetActivity;
-import com.example.my_demo.adapter.FirstFragmentAdapter;
+import com.oldwang.my_demo.activity.CircleProgessActivity;
+import com.oldwang.my_demo.activity.LetterIndexActivity;
+import com.oldwang.my_demo.activity.NightModeSetActivity;
+import com.oldwang.my_demo.adapter.FirstFragmentAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.annotation.Nullable;

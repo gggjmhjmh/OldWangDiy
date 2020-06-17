@@ -1,4 +1,4 @@
-package com.example.my_demo.activity;
+package com.oldwang.my_demo.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -9,7 +9,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
-import com.example.my_demo.R;
+import com.oldwang.my_demo.R;
 
 /**
  * Android夜间模式的实现方案：https://blog.csdn.net/qq_20521573/article/details/76222085

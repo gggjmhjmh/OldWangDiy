@@ -1,4 +1,4 @@
-package com.example.librarymodule;
+package com.oldwang.librarymodule;
 
 import android.content.Context;
 

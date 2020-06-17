@@ -1,4 +1,4 @@
-package com.example.my_demo;
+package com.oldwang.my_demo;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,7 +11,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.my_demo.adapter.FirstFragmentAdapter;
+import com.oldwang.my_demo.adapter.FirstFragmentAdapter;
 
 import java.util.ArrayList;
 
