@@ -23,10 +23,20 @@
             style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
             android:layout_width="match_parent"
             android:layout_height="6dp"
-            android:progress="60"
             android:layout_margin="5dp"
+            android:progress="60"
             android:progressDrawable="@drawable/progress_drawable"
             android:secondaryProgress="80" />
+
+        <SeekBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:progress="60"
+            android:progressDrawable="@drawable/progress_drawable"
+            android:secondaryProgress="80"
+            android:splitTrack="false"
+            android:thumb="@drawable/dot_10dp_yellow" />
 
     </LinearLayout>
 
