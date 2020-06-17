@@ -77,7 +77,7 @@ public class LetterIndexView extends View {
         Rect mBounds = new Rect();
         mPaint.getTextBounds("W", 0, 1, mBounds);
         float textWidth = mBounds.width();
-        float textHeight = mBounds.height();
+        float textHeight = mBounds.height() + SizeUtils.dp2px(4);
 
         if (widthMode == MeasureSpec.EXACTLY) {
             width = widthSize;
