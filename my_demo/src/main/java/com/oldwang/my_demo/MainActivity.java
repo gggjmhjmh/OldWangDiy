@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1 && requestCode == 1) {
-            //黑夜模式转换了
+            //黑夜模式转换了,可能是新的adk版本不需要调用这行代码了
 //            ActivityCompat.recreate(MainActivity.this); //重启activity
         }
     }
