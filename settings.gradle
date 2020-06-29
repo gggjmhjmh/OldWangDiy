@@ -1,3 +1,4 @@
 include ':app'
 include ':my_demo'
 include ':librarymodule'
+include ':kotlin'
