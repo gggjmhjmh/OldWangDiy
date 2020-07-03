@@ -15,7 +15,7 @@ import com.amap.api.location.AMapLocationListener;
  */
 
 
-public class GDLocationManager implements MyLocationManager {
+public class GDLocationManager extends MyLocationManager {
     private AMapLocationClient mLocationClient = null;
     private AMapLocationClientOption mLocationOption = null;
 

@@ -3,6 +3,7 @@ package com.oldwang.my_demo;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.oldwang.librarymodule.diy.MessageDialog;
 import com.oldwang.my_demo.activity.CircleProgessActivity;
 import com.oldwang.my_demo.activity.LetterIndexActivity;
 import com.oldwang.my_demo.activity.NightModeSetActivity;
@@ -127,5 +128,15 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        new MessageDialog(this, "确定要退出应用？").show(new MessageDialog.OnBaseClickListener() {
+            @Override
+            public void onRightBtClick(View v) {
+                MainActivity.super.onBackPressed();
+            }
+        });
     }
 }
