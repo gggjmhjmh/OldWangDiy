@@ -18,7 +18,7 @@ import com.oldwang.librarymodule.R;
  * @author OldWang
  * @description 消息提示框
  * @date 2020/7/3
- * 可以只有一个button,可以传自定义布局(但View的id和类型不可改变)
+ * 可以只有一个button,可以传自定义布局
  */
 public class MessageDialog extends Dialog implements View.OnClickListener {
 
