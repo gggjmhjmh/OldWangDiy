@@ -132,11 +132,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        new MessageDialog(this, "确定要退出应用？").show(new MessageDialog.OnBaseClickListener() {
-            @Override
-            public void onRightBtClick(View v) {
-                MainActivity.super.onBackPressed();
-            }
-        });
+        new MessageDialog(this, "确定要退出应用？")
+                .show(new MessageDialog.OnBaseClickListener() {
+                    @Override
+                    public void onRightBtClick(View v) {
+                        MainActivity.super.onBackPressed();
+                    }
+                });
     }
 }

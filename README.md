@@ -19,6 +19,23 @@ Step 2. Add the dependency
 
 ## How use ?
 
+
+#### MessageDialog：
+
+```
+ @Override
+    public void onBackPressed() {
+        new MessageDialog(this, "确定要退出应用？")
+                .show(new MessageDialog.OnBaseClickListener() {
+                    @Override
+                    public void onRightBtClick(View v) {
+                        MainActivity.super.onBackPressed();
+                    }
+                });
+    }
+```
+    
+    
 #### 圆形彩色进度条：
 
 xml:
