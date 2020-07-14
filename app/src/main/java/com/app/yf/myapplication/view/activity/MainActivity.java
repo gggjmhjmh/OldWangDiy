@@ -1,31 +1,21 @@
 package com.app.yf.myapplication.view.activity;
 
 import android.Manifest;
-import android.animation.Animator;
 import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewAnimationUtils;
-import android.view.animation.Animation;
-import android.view.animation.LinearInterpolator;
-import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.app.yf.myapplication.R;
 import com.blankj.utilcode.util.FileIOUtils;
-import com.blankj.utilcode.util.TouchUtils;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.model.GlideUrl;
-import com.bumptech.glide.load.model.Headers;
+import com.bumptech.glide.request.RequestOptions;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.FileCallback;
-import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Progress;
 import com.lzy.okgo.model.Response;
 import com.shuyu.gsyvideoplayer.GSYVideoManager;
@@ -40,14 +30,14 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import cn.jzvd.JzvdStd;
+import jp.wasabeef.glide.transformations.BlurTransformation;
+import jp.wasabeef.glide.transformations.GrayscaleTransformation;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -72,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 //        downImg();
-//        loadImg();  //加载gzip压缩过的图片
+        loadImg();
 
 //        gsyVideo();
 //        jiaoZi();
@@ -337,7 +327,7 @@ public class MainActivity extends AppCompatActivity {
         String url = "http://wx.sunzhoubo.top/img/b.jpg";
 //        Glide.with(this).load(url).into(target);
 
-        //加载gzip，不这样做好像也可以加载gzip
+       /* //加载gzip，不这样做好像也可以加载gzip
         GlideUrl glideUrl = new GlideUrl(url, new Headers() {
             @Override
             public Map<String, String> getHeaders() {
@@ -349,7 +339,12 @@ public class MainActivity extends AppCompatActivity {
         });
         System.out.println("~~~~~~~~~~~" + glideUrl.getHeaders());
 
-        Glide.with(this).load(glideUrl).into(target);
+        Glide.with(this).load(glideUrl).into(target);*/
+
+
+        Glide.with(this).load(url)
+                .apply(RequestOptions.bitmapTransform(new BlurTransformation()))
+                .into(target);
 
     }
 
