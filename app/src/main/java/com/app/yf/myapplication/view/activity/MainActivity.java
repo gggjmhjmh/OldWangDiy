@@ -21,8 +21,12 @@ import com.app.yf.myapplication.R;
 import com.blankj.utilcode.util.FileIOUtils;
 import com.blankj.utilcode.util.TouchUtils;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.model.GlideUrl;
+import com.bumptech.glide.load.model.Headers;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.FileCallback;
+import com.lzy.okgo.model.HttpParams;
+import com.lzy.okgo.model.Progress;
 import com.lzy.okgo.model.Response;
 import com.shuyu.gsyvideoplayer.GSYVideoManager;
 import com.shuyu.gsyvideoplayer.listener.GSYSampleCallBack;
@@ -36,6 +40,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -64,15 +70,11 @@ public class MainActivity extends AppCompatActivity {
 
         test();
 
-//        okgo();
-
-//        ADVideoPlayer = findViewById(R.id.ad_player);
-//        videoPlayer = findViewById(R.id.player);
-//        gsyVideo();
 
 //        downImg();
 //        loadImg();  //加载gzip压缩过的图片
 
+//        gsyVideo();
 //        jiaoZi();
     }
 
@@ -176,6 +178,10 @@ public class MainActivity extends AppCompatActivity {
 
         if (!checkPermission()) return;
 
+//        ADVideoPlayer = findViewById(R.id.ad_player);
+//        videoPlayer = findViewById(R.id.player);
+
+
         //EXOPlayer内核，支持格式更多
 //        PlayerFactory.setPlayManager(Exo2PlayerManager.class);
 
@@ -187,9 +193,8 @@ public class MainActivity extends AppCompatActivity {
 //            String url = Uri.parse("file:///android_asset/" +  "guide.mp4").getPath();
 //        String url = RawResourceDataSource.buildRawResourceUri(R.raw.guide).getPath();
 
-
+//本地视频地址
         String url = copyVideoToLocalPath("local_video.mp4", "aaa");
-
 
         urls.add(new GSYSampleADVideoPlayer.GSYADVideoModel(url, "", GSYSampleADVideoPlayer.GSYADVideoModel.TYPE_AD));
         //正式内容1
@@ -306,13 +311,18 @@ public class MainActivity extends AppCompatActivity {
             System.out.println("~~~~~~~~~~" + b);
         }
         String url = "http://wx.sunzhoubo.top/img/b.jpg";
-        OkGo.<File>get(url).
-                headers("Accept-Encoding", "gzip, default").
+        OkGo.<File>get(url)
+                .headers("Accept-Encoding", "gzip, default").
                 execute(new FileCallback(dir, "b.jpg") {
                     @Override
                     public void onSuccess(Response<File> response) {
 //                iv.setImageURI(Uri.fromFile(response.body()));
                         Glide.with(MainActivity.this).load(response.body()).into(target);
+                    }
+
+                    @Override
+                    public void downloadProgress(Progress progress) {
+                        super.downloadProgress(progress);
                     }
 
                     @Override
@@ -325,10 +335,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadImg() {
         String url = "http://wx.sunzhoubo.top/img/b.jpg";
+//        Glide.with(this).load(url).into(target);
 
-        Glide.with(this).load(url).into(target);
-
-        /*GlideUrl glideUrl = new GlideUrl(url, new Headers() {
+        //加载gzip，不这样做好像也可以加载gzip
+        GlideUrl glideUrl = new GlideUrl(url, new Headers() {
             @Override
             public Map<String, String> getHeaders() {
                 Map<String, String> header = new HashMap<>();
@@ -337,9 +347,9 @@ public class MainActivity extends AppCompatActivity {
                 return header;
             }
         });
-        System.out.println("~~~~~~~~~~~"+glideUrl.getHeaders());
+        System.out.println("~~~~~~~~~~~" + glideUrl.getHeaders());
 
-        Glide.with(this).load(glideUrl).into(iv);*/
+        Glide.with(this).load(glideUrl).into(target);
 
     }
 
@@ -368,7 +378,6 @@ public class MainActivity extends AppCompatActivity {
         if (orientationUtils != null) {
             orientationUtils.backToProtVideo();
         }
-
         if (GSYVideoManager.backFromWindowFull(this)) {
             return;
         }
