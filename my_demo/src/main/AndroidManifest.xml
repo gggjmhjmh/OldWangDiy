@@ -12,7 +12,7 @@
 
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="7008f9f0cc7b227bbc5f66f4ec136050" />
+            android:value="${AMAP_KEY}" />
         <service android:name="com.amap.api.location.APSService" />
 
         <activity android:name="com.oldwang.my_demo.activity.LetterIndexActivity"></activity>

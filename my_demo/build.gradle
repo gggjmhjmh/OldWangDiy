@@ -31,14 +31,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 
             manifestPlaceholders = [app_name: "oldWang_demo",
-                                    AMAP_KEY: "c2231645ac81671140acb234c7273581"//高德地图
+                                    AMAP_KEY: "1fa2c7d789811cc01acb67054f0c2c74"//高德地图
             ]
             buildConfigField "boolean", "ENABLE_DEBUG", "false"
             signingConfig signingConfigs.config
         }
         debug {
             manifestPlaceholders = [app_name: "oldWang_demo测试版",
-                                    AMAP_KEY: "c2231645ac81671140acb234c7273581"//高德地图
+                                    AMAP_KEY: "1fa2c7d789811cc01acb67054f0c2c74"//高德地图
             ]
             buildConfigField "boolean", "ENABLE_DEBUG", "true"
             signingConfig signingConfigs.config
