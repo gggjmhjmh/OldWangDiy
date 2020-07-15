@@ -6,6 +6,7 @@ import android.os.Bundle;
 import com.oldwang.librarymodule.diy.MessageDialog;
 import com.oldwang.my_demo.activity.CircleProgessActivity;
 import com.oldwang.my_demo.activity.LetterIndexActivity;
+import com.oldwang.my_demo.activity.LocationActivity;
 import com.oldwang.my_demo.activity.NightModeSetActivity;
 import com.oldwang.my_demo.adapter.FirstFragmentAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -120,11 +121,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void doClick(View view) {
         switch (view.getId()) {
-            case R.id.letterIndex:
+            case R.id.letterIndex: //首字母索引
                 startActivity(new Intent(this, LetterIndexActivity.class));
                 break;
-            case R.id.circleProgess:
+            case R.id.circleProgess: //圆形彩色进度条
                 startActivity(new Intent(this, CircleProgessActivity.class));
+                break;
+            case R.id.location: //定位
+                startActivity(new Intent(this, LocationActivity.class));
                 break;
         }
 

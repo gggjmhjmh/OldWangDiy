@@ -38,4 +38,5 @@ dependencies {
 
     implementation 'com.blankj:utilcodex:1.29.0'
     implementation project(path: ':librarymodule')
+    implementation project(path: ':lib_location')
 }
