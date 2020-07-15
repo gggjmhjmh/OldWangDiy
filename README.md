@@ -13,7 +13,7 @@ Step 1. Add it in your root build.gradle at the end of repositories:
 Step 2. Add the dependency
 
 	dependencies {
-	        implementation 'com.github.gggjmhjmh:OldWangDiy:版本名'
+	        implementation 'com.github.gggjmhjmh:OldWangDiy:1.0.4'
 	}
 
 
@@ -108,15 +108,15 @@ java:
 
 #### 高德定位：
 
-  1、首先，要在高德开放平台创建应用、添加key
-  2、然后，在AndroidManifest.xml配置文件application标签里添加代码，填写平台上生成的key
+  1、首先，要在高德开放平台创建应用、添加key；
+  2、然后，在AndroidManifest.xml配置文件application标签里添加代码，填写平台上生成的key；
 ```
      <meta-data
          android:name="com.amap.api.v2.apikey"
          android:value="your key" />
      <service android:name="com.amap.api.location.APSService" />
 ```
-  3、开始定位
+  3、开始定位：
 ```
      //定位结束后的监听
      GDLocationManager.getInstance().setListener(new MyLocationManager.LocationCallback() {
