@@ -184,7 +184,7 @@ public void doClick(View view) {
 
                 @Override
                 public void notOpenPermission() {
-                    //未打开权限,用户拒绝开开启权限了
+                    //未打开权限,用户拒绝开启权限了
                     Toast.makeText(LocationActivity.this, "未开启定位权限，无法定位", Toast.LENGTH_SHORT).show();
                 }
 
