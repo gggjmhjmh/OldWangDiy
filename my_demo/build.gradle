@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.my_demo"
-        
+
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode rootProject.ext.versionCode
@@ -15,10 +15,33 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+
+    signingConfigs {
+        config {
+            keyAlias "my_demo"
+            keyPassword "123456"
+            storePassword "123456"
+            storeFile file("../key/my_demo.jks")
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            manifestPlaceholders = [app_name: "oldWang_demo",
+                                    AMAP_KEY: "c2231645ac81671140acb234c7273581"//高德地图
+            ]
+            buildConfigField "boolean", "ENABLE_DEBUG", "false"
+            signingConfig signingConfigs.config
+        }
+        debug {
+            manifestPlaceholders = [app_name: "oldWang_demo测试版",
+                                    AMAP_KEY: "c2231645ac81671140acb234c7273581"//高德地图
+            ]
+            buildConfigField "boolean", "ENABLE_DEBUG", "true"
+            signingConfig signingConfigs.config
         }
     }
 
