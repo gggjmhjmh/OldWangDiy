@@ -3,15 +3,18 @@ package com.app.yf.myapplication.view.activity;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.app.yf.myapplication.R;
 import com.blankj.utilcode.util.FileIOUtils;
+import com.blankj.utilcode.util.ToastUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.lzy.okgo.OkGo;
@@ -37,7 +40,6 @@ import androidx.core.app.ActivityCompat;
 
 import cn.jzvd.JzvdStd;
 import jp.wasabeef.glide.transformations.BlurTransformation;
-import jp.wasabeef.glide.transformations.GrayscaleTransformation;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -69,8 +71,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    private  int i;
     private void test() {
-
+        ToastUtils.setGravity(Gravity.CENTER,0,0);
+        ToastUtils.setBgColor(Color.BLACK);
+        ToastUtils.setMsgColor(Color.WHITE);
+        target.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ToastUtils.showShort(i+"");
+                i++;
+            }
+        });
 
     }
 
