@@ -126,8 +126,8 @@ public class MessageDialog extends Dialog implements View.OnClickListener {
         }
         if (btn_right != null) {
             btn_right.setOnClickListener(this);
-            if (!TextUtils.isEmpty(left)) {
-                btn_right.setText(left);
+            if (!TextUtils.isEmpty(right)) {
+                btn_right.setText(right);
             }
         }
 
