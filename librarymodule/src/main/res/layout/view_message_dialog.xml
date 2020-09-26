@@ -5,7 +5,7 @@
     android:layout_margin="20dp"
     android:background="@drawable/bg_messge_dialog"
     android:orientation="vertical"
-    android:paddingTop="30dp">
+    android:paddingTop="28dp">
 
     <TextView
         android:id="@+id/tv_title"
@@ -13,8 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="2dp"
         android:layout_marginRight="20dp"
-        android:layout_marginBottom="15dp"
         android:gravity="center"
         android:maxLines="5"
         android:text="-"
@@ -28,8 +28,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="2dp"
         android:layout_marginRight="20dp"
-        android:layout_marginBottom="30dp"
         android:gravity="center"
         android:maxLines="10"
         android:text="-"
@@ -40,7 +40,8 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="#E9E9E9" />
+        android:layout_marginTop="30dp"
+        android:background="#493C3C43" />
 
     <LinearLayout
         android:layout_width="280dp"

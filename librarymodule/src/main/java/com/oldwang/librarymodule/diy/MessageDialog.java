@@ -101,6 +101,7 @@ public class MessageDialog extends Dialog implements View.OnClickListener {
 
         this.setCanceledOnTouchOutside(false);
 
+        //标题
         TextView tv_title = findViewById(R.id.tv_title);
         if (tv_title != null) {
             if (TextUtils.isEmpty(title)) {
@@ -110,10 +111,15 @@ public class MessageDialog extends Dialog implements View.OnClickListener {
                 tv_title.setText(title);
             }
         }
-
+        //消息体
         tv_message = findViewById(R.id.tv_message);
-        if (tv_message != null && !TextUtils.isEmpty(message)) {
-            tv_message.setText(message);
+        if (tv_title != null) {
+            if (TextUtils.isEmpty(message)) {
+                tv_message.setVisibility(View.GONE);
+            } else {
+                tv_message.setVisibility(View.VISIBLE);
+                tv_message.setText(message);
+            }
         }
 
         TextView btn_left = findViewById(R.id.btn_left);
