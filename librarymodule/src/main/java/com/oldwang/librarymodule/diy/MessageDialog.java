@@ -25,9 +25,22 @@ public class MessageDialog extends Dialog implements View.OnClickListener {
     private TextView tv_message;
     private String title, message, left, right;
     private boolean isOnlyOk;
-    private int layoutResId = R.layout.view_message_dialog;
+    private int layoutResId;
     private View layoutView;
     private OnBaseClickListener baseClickListener;
+
+    private int getLayoutResId() {
+        //调用者设置了布局，就用设置的布局
+        return layoutResId != 0 ? layoutResId : creatLayoutResId();
+    }
+
+    /**
+     * 子类覆写要用的布局
+     * @return
+     */
+    protected int creatLayoutResId() {
+        return R.layout.view_message_dialog;
+    }
 
     public MessageDialog setLayoutResId(int layoutResId) {
         this.layoutResId = layoutResId;
@@ -97,7 +110,7 @@ public class MessageDialog extends Dialog implements View.OnClickListener {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         if (layoutView != null)
             setContentView(layoutView);
-        else setContentView(layoutResId);
+        else setContentView(getLayoutResId());
 
         this.setCanceledOnTouchOutside(false);
 
