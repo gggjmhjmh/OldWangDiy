@@ -31,14 +31,14 @@ public class MessageDialog extends Dialog implements View.OnClickListener {
 
     private int getLayoutResId() {
         //调用者设置了布局，就用设置的布局
-        return layoutResId != 0 ? layoutResId : creatLayoutResId();
+        return layoutResId != 0 ? layoutResId : createLayoutResId();
     }
 
     /**
      * 子类覆写要用的布局
      * @return
      */
-    protected int creatLayoutResId() {
+    protected int createLayoutResId() {
         return R.layout.view_message_dialog;
     }
 
