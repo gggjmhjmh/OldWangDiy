@@ -1,0 +1,31 @@
+<resources>
+
+
+
+    <style name="BottomDialog" parent="@android:style/Theme.Holo.Dialog">
+        <!--是否有边框-->
+        <item name="android:windowFrame">@null</item>
+        <!--是否悬浮在Activity上-->
+        <item name="android:windowIsFloating">true</item>
+        <!--无标题-->
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+
+<!--                <item name="android:background">@android:color/transparent</item>-->
+                <!-- 半透明 -->
+<!--                <item name="android:windowIsTranslucent">true</item>-->
+        <!--        &lt;!&ndash; 模糊 &ndash;&gt;-->
+        <!--        <item name="android:backgroundDimEnabled">true</item>-->
+                <!-- 遮罩层 -->
+                <item name="android:backgroundDimAmount">0.4</item>
+    </style>
+    <!--从底部进入退出动画-->
+    <style name="BottomDialog.Animation" parent="Animation.AppCompat.Dialog">
+        <!--        //弹入动画-->
+        <item name="android:windowEnterAnimation">@anim/dialog_in_anim</item>
+        <!--        //弹出动画-->
+        <item name="android:windowExitAnimation">@anim/dialog_out_anim</item>
+    </style>
+
+</resources>

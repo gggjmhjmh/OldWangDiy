@@ -10,7 +10,8 @@ public class FastClickUtil {
 
     /**
      * 是否快速点击
-     * 如果是快速点击，重新计算间隔时间，会记录最后一次的点击时间
+     * 不管是否快速点击，都重新计算间隔时间
+     * 效果：如果快速一直点，一直返回true
      */
     public static boolean isFastClick() {
         boolean flag = true;
@@ -27,6 +28,8 @@ public class FastClickUtil {
 
     /**
      * 是否快速点击
+     * 如果是快速点击，不重新计算间隔时间
+     * 效果：如果快速一直点，过了离上次返回false的间隔300毫秒，就会返回false
      */
     public static boolean isFastClick2() {
         return isFastClick2(300);
@@ -34,7 +37,8 @@ public class FastClickUtil {
 
     /**
      * 是否快速点击
-     * 如果是快速点击，不重新计算间隔时间，不会记录最后一次的点击时间
+     * 如果是快速点击，不重新计算间隔时间
+     * 效果：如果快速一直点，过了离上次返回false的间隔，就会返回false
      *
      * @param intervalMillis 间隔 毫秒 (就是在多少毫秒之内算快速点击)
      */

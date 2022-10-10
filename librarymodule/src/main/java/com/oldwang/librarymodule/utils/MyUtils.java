@@ -19,7 +19,16 @@ import com.blankj.utilcode.util.ScreenUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.blankj.utilcode.util.Utils;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.lang.reflect.Method;
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -40,6 +49,7 @@ import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
  * dp2px、px2dp
  */
 public class MyUtils {
+    private static final String TAG = "MyUtils";
     private static Context context;
 
     private MyUtils() {
@@ -86,8 +96,13 @@ public class MyUtils {
         return false;
     }
 
-
-    public static String FormetFileSize(long fileS) {
+    /**
+     * 格式化文件大小
+     *
+     * @param fileS 文件大小
+     * @return
+     */
+    public static String formetFileSize(long fileS) {
         DecimalFormat df = new DecimalFormat("#.00");
         String fileSizeString = "";
         String wrongSize = "0B";
@@ -106,26 +121,26 @@ public class MyUtils {
         return fileSizeString;
     }
 
+
     /**
-     * 保留两位小数，如果没有小数，不会会显示小数
+     * 判断手机是否为小米手机
+     *
+     * @return
      */
-    public static String formatDecimalsMaxTwo(double d) {
-        return new java.text.DecimalFormat("#.##").format(d);
-    }
-
     public static boolean isMIUI() {
-        String manufacturer = Build.MANUFACTURER;
-        //这个字符串可以自己定义,例如判断华为就填写huawei,魅族就填写meizu
-        if ("xiaomi".equalsIgnoreCase(manufacturer)) {
-            return true;
-        }
-        return false;
+        return isBrand("xiaomi");
     }
 
-    public static boolean isViVo() {
+    /**
+     * 判断手机是否为某品牌的手机
+     *
+     * @param brandStr 手机品牌 如： "xiaomi"、"vivo" 等
+     * @return
+     */
+    public static boolean isBrand(String brandStr) {
         String manufacturer = Build.MANUFACTURER;
         //这个字符串可以自己定义,例如判断华为就填写huawei,魅族就填写meizu
-        if ("vivo".equalsIgnoreCase(manufacturer)) {
+        if (brandStr.equalsIgnoreCase(manufacturer)) {
             return true;
         }
         return false;
@@ -301,7 +316,12 @@ public class MyUtils {
         return Pattern.compile(PHONE_PATTERN).matcher(phone).matches();
     }
 
-    //判断是否身份证号
+    /**
+     * 判断是否身份证号
+     *
+     * @param cardId
+     * @return
+     */
     public static boolean isCard(String cardId) {
 
         if (cardId.length() == 15 || cardId.length() == 18) {
@@ -319,12 +339,6 @@ public class MyUtils {
             //  error.put("cardId", "身份证号码长度必须等于15或18位");
         }
         return true;
-    }
-
-    public static String getMMSSTime(long time) {
-        SimpleDateFormat format = new SimpleDateFormat("mm:ss");
-        Date d1 = new Date(time);
-        return format.format(d1);
     }
 
     private static boolean cardCodeVerifySimple(String cardcode) {
@@ -421,6 +435,13 @@ public class MyUtils {
         Log.i(TAG, string);
     }
 
+    //格式成分秒"mm:ss"
+    public static String getMMSSTime(long time) {
+        SimpleDateFormat format = new SimpleDateFormat("mm:ss");
+        Date d1 = new Date(time);
+        return format.format(d1);
+    }
+
     /**
      * 将 dp 转为 px
      */
@@ -500,6 +521,13 @@ public class MyUtils {
     }
 
     /**
+     * 保留两位小数，如果没有小数，不会显示小数
+     */
+    public static String formatDecimalsMaxTwo(double d) {
+        return new java.text.DecimalFormat("#.##").format(d);
+    }
+
+    /**
      * 保留两位小数
      */
     public static String formatDecimals(double d) {
@@ -572,5 +600,117 @@ public class MyUtils {
         }
         return (int) ivHight;
     }
+
+    /**
+     * 判断两个时间段是否有重叠
+     *
+     * @param startTime  开始时间 （如20:30,传2030）
+     * @param endTime    结束时间
+     * @param startTime_ 开始时间
+     * @param endTime_   结束时间
+     * @return
+     */
+    public static boolean isTimeOverlap(int startTime, int endTime,
+                                        int startTime_, int endTime_) {
+        if (endTime_ <= startTime) {
+            //如果跨天了
+            if (endTime < startTime) {
+                if (endTime > startTime_) {
+                    // 重叠
+                    return true;
+                }
+            }
+            Log.i(TAG, "isTimeOverlap: `` 不重叠");
+        } else if (endTime <= startTime_) {
+            //如果跨天了
+            if (endTime_ < startTime_) {
+                if (endTime_ > startTime) {
+                    // 重叠
+                    return true;
+                }
+            }
+            Log.i(TAG, "isTimeOverlap: `` 不重叠");
+        } else {
+            // 重叠
+            return true;
+        }
+        return false;
+    }
+
+    //是否为有效的json数据
+    public static boolean isJsonValid(String str) {
+        try {
+            new JSONObject(str);
+        } catch (JSONException e) {
+            try {
+                new JSONArray(str);
+            } catch (JSONException e1) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    //读取txt文件的文本内容
+    public static String readTxt(File file) {
+        String str = "";
+        try {
+            InputStreamReader isr = new InputStreamReader(new FileInputStream(file), "UTF-8");
+            BufferedReader br = new BufferedReader(isr);
+
+            String mimeTypeLine = null;
+            while ((mimeTypeLine = br.readLine()) != null) {
+                str = str + mimeTypeLine;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return str;
+    }
+
+
+    /**
+     * 提供（相对）精确的除法运算。当发生除不尽的情况时，由scale参数指
+     * 定精度，以后的数字四舍五入。
+     *
+     * @param v1    被除数
+     * @param v2    除数
+     * @param scale 表示表示需要精确到小数点以后几位。
+     * @return 两个参数的商
+     */
+    public static double div(double v1, double v2, int scale) {
+        if (scale < 0) {
+            throw new IllegalArgumentException(
+                    "The scale must be a positive integer or zero");
+        }
+        BigDecimal b1 = new BigDecimal(Double.toString(v1));
+        BigDecimal b2 = new BigDecimal(Double.toString(v2));
+        return b1.divide(b2, scale, BigDecimal.ROUND_HALF_UP).doubleValue();
+    }
+
+    /**
+     * 提供精确的减法运算。
+     *
+     * @param v1 被减数
+     * @param v2 减数
+     * @return 两个参数的差
+     */
+    public static double sub(double v1, double v2) {
+        BigDecimal b1 = new BigDecimal(Double.toString(v1));
+        BigDecimal b2 = new BigDecimal(Double.toString(v2));
+        return b1.subtract(b2).doubleValue();
+    }
+
+    /**
+     * 关闭 Disposable
+     */
+//    public static void closeDisposable (Disposable mDisposable){
+//        // 关掉 计时器
+//        if (mDisposable != null && !mDisposable.isDisposed()) {
+//            mDisposable.dispose();
+//            mDisposable = null;
+//        }
+//    }
+
 
 }

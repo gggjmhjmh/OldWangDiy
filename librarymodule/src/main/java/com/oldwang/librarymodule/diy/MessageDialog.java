@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -22,40 +23,10 @@ import com.oldwang.librarymodule.R;
  */
 public class MessageDialog extends Dialog implements View.OnClickListener {
 
-    private TextView tv_message;
     private String title, message, left, right;
-    private boolean isOnlyOk;
-    private int layoutResId;
     private View layoutView;
     private OnBaseClickListener baseClickListener;
 
-    private int getLayoutResId() {
-        //调用者设置了布局，就用设置的布局
-        return layoutResId != 0 ? layoutResId : createLayoutResId();
-    }
-
-    /**
-     * 子类覆写要用的布局
-     * @return
-     */
-    protected int createLayoutResId() {
-        return R.layout.view_message_dialog;
-    }
-
-    public MessageDialog setLayoutResId(int layoutResId) {
-        this.layoutResId = layoutResId;
-        return this;
-    }
-
-    public MessageDialog setLayoutView(View layoutView) {
-        this.layoutView = layoutView;
-        return this;
-    }
-
-    public MessageDialog setOnlyOk(boolean onlyOk) {
-        this.isOnlyOk = onlyOk;
-        return this;
-    }
 
     public MessageDialog(Context context) {
         //super(context, R.style.NotDaddingDialog);
@@ -70,12 +41,12 @@ public class MessageDialog extends Dialog implements View.OnClickListener {
         this.message = message;
     }
 
-    public MessageDialog(Context context, String leftBtText, String rightBtText) {
+    public MessageDialog(Context context, String message, String leftBtText) {
         //super(context, R.style.NotDaddingDialog);
         super(context);
         setOwnerActivity((Activity) context);
+        this.message = message;
         this.left = leftBtText;
-        this.right = rightBtText;
     }
 
     public MessageDialog(Context context, String message, String leftBtText, String rightBtText) {
@@ -97,12 +68,25 @@ public class MessageDialog extends Dialog implements View.OnClickListener {
         this.right = rightBtText;
     }
 
-    public MessageDialog(Context context, int layoutResId) {
-        super(context);
-        setOwnerActivity((Activity) context);
-        this.layoutResId = layoutResId;
+
+    /**
+     * 子类覆写要用的布局
+     *
+     * @return
+     */
+    protected int createLayoutResId() {
+        return R.layout.view_message_dialog;
     }
 
+    public MessageDialog setLayoutResId(int layoutResId) {
+        setLayoutView(LayoutInflater.from(getContext()).inflate(layoutResId, null));
+        return this;
+    }
+
+    public MessageDialog setLayoutView(View layoutView) {
+        this.layoutView = layoutView;
+        return this;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,7 +94,7 @@ public class MessageDialog extends Dialog implements View.OnClickListener {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         if (layoutView != null)
             setContentView(layoutView);
-        else setContentView(getLayoutResId());
+        else setContentView(createLayoutResId());
 
         this.setCanceledOnTouchOutside(false);
 
@@ -125,8 +109,8 @@ public class MessageDialog extends Dialog implements View.OnClickListener {
             }
         }
         //消息体
-        tv_message = findViewById(R.id.tv_message);
-        if (tv_title != null) {
+        TextView tv_message = findViewById(R.id.tv_message);
+        if (tv_message != null) {
             if (TextUtils.isEmpty(message)) {
                 tv_message.setVisibility(View.GONE);
             } else {
@@ -141,24 +125,24 @@ public class MessageDialog extends Dialog implements View.OnClickListener {
             btn_left.setOnClickListener(this);
             if (!TextUtils.isEmpty(left)) {
                 btn_left.setText(left);
+            } else {
+                btn_left.setVisibility(View.GONE);
             }
         }
         if (btn_right != null) {
             btn_right.setOnClickListener(this);
             if (!TextUtils.isEmpty(right)) {
                 btn_right.setText(right);
+            } else {
+                btn_right.setVisibility(View.GONE);
             }
         }
 
-        if (isOnlyOk) {
+        if (btn_left == null || btn_right == null || TextUtils.isEmpty(left) || TextUtils.isEmpty(right)) {
             View line = findViewById(R.id.line);
             if (line != null) line.setVisibility(View.GONE);
-            if (btn_left != null) btn_left.setVisibility(View.GONE);
-            if (btn_right != null) {
-                btn_right.setVisibility(View.VISIBLE);
-                btn_right.setText(TextUtils.isEmpty(right) ? "确认" : right);
-            }
         }
+
 
         View cha = findViewById(R.id.cha);
         if (cha != null)
@@ -181,8 +165,9 @@ public class MessageDialog extends Dialog implements View.OnClickListener {
         //wl.gravity = Gravity.CENTER;
         //wl.gravity = Gravity.CENTER_HORIZONTAL;
         WindowManager m = window.getWindowManager();
-        wl.width = ViewGroup.LayoutParams.WRAP_CONTENT; //这样才能居中显示，才能点击外面dialog消失
-        wl.height = ViewGroup.LayoutParams.WRAP_CONTENT;//这样才能居中显示，才能点击外面dialog消失
+        wl.width = ViewGroup.LayoutParams.MATCH_PARENT;
+//        wl.width = ViewGroup.LayoutParams.WRAP_CONTENT; //这样才能居中显示，才能点击外面dialog消失
+//        wl.height = ViewGroup.LayoutParams.WRAP_CONTENT;//这样才能居中显示，才能点击外面dialog消失
         //      Display d = m.getDefaultDisplay(); // 为获取屏幕宽、高
         //		wl.width = d.getWidth();
         //		wl.height = d.getHeight();
@@ -203,6 +188,8 @@ public class MessageDialog extends Dialog implements View.OnClickListener {
             if (baseClickListener != null) baseClickListener.onChaClick(null);
         } else if (id == R.id.ok) {// 确定按键
             if (baseClickListener != null) baseClickListener.onBtOkClick(null);
+        } else {
+            if (baseClickListener != null) baseClickListener.onViewClick(v);
         }
         dismiss();
     }
@@ -235,9 +222,10 @@ public class MessageDialog extends Dialog implements View.OnClickListener {
         return this;
     }
 
-    public void show(OnBaseClickListener clickListener) {
+    public MessageDialog show(OnBaseClickListener clickListener) {
         setBaseClickListener(clickListener)
                 .show();
+        return this;
     }
 
     public MessageDialog setBaseClickListener(OnBaseClickListener clickListener) {
@@ -256,6 +244,9 @@ public class MessageDialog extends Dialog implements View.OnClickListener {
         }
 
         default void onBtOkClick(View v) {
+        }
+
+        default void onViewClick(View v) {
         }
     }
 
