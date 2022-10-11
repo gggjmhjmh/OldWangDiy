@@ -35,7 +35,7 @@ Step 2. Add the dependency
     }
 ```
 
-#### MessageDialog：
+#### 底部列表弹框：
 
 ```
   List<String> list = new ArrayList<>();
