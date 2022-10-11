@@ -55,6 +55,11 @@ Step 2. Add the dependency
       }
   });
   bottomListDialog.show();
+
+  //列表数据 还仅可以传字符串列表，还可以传Object列表,再指定要显示的成员变量,比如要以变量title的值作为条目的显示文本
+  new BottomListDialog(this).setDataObj("标题",list,"title");
+  //还可以传 实现了ItemShowText接口的对象列表，通过实现itemShowText()返回条目的显示文本
+  new BottomListDialog(this).setDataObj("标题",list,);
 ```
 
     
