@@ -13,7 +13,7 @@ Step 1. Add it in your root build.gradle at the end of repositories:
 Step 2. Add the dependency
 
 	dependencies {
-	        implementation 'com.github.gggjmhjmh:OldWangDiy:1.0.4'
+	        implementation 'com.github.gggjmhjmh:OldWangDiy:1.0.5'
 	}
 
 
@@ -34,7 +34,29 @@ Step 2. Add the dependency
                 });
     }
 ```
-    
+
+#### MessageDialog：
+
+```
+  List<String> list = new ArrayList<>();
+  list.add("1");
+  list.add("2");
+  list.add("3");
+  list.add("4");
+  list.add("5");
+  list.add("6");
+  final BottomListDialog bottomListDialog =  new BottomListDialog(this).setData("标题",list)
+                                              .setSelectIndex(1); //不设置选中下标，就是正常的列表，没有选中
+  bottomListDialog.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+      @Override
+      public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+          bottomListDialog.setSelectIndex(i);
+//          bottomListDialog.dismiss();
+      }
+  });
+  bottomListDialog.show();
+```
+
     
 #### 圆形彩色进度条：
 
