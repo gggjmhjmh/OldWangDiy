@@ -3,6 +3,7 @@ package com.oldwang.librarymodule.diy;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,25 +18,21 @@ import android.widget.TextView;
 
 import com.oldwang.librarymodule.R;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * 底部列表弹框
  */
-// TODO: 2022/10/10 待优化：数据可以传入Object
 
 public class BottomListDialog extends Dialog {
-    Context mContext;
+    private Context mContext;
 
     private ListView listView;
     private TextView mTitle;
 
-
-    private String title;
-    private List<String> dataList;
     private DialogListAdapter adapter;
-
 
     public BottomListDialog(Context context) {
         super(context, R.style.BottomDialog);
@@ -69,33 +66,70 @@ public class BottomListDialog extends Dialog {
 
         adapter = new DialogListAdapter(mContext);
         listView.setAdapter(adapter);
-
     }
 
-    public void setData(String title, List<String> dataList, int selectIndex) {
-        this.title = title;
-        this.dataList = dataList;
+    /**
+     * 设置数据列表
+     *
+     * @param title
+     * @param dataList
+     */
 
+    public BottomListDialog setData(String title, List<String> dataList) {
+        return setData(title, dataList, null);
+    }
+
+    /**
+     * 设置数据列表
+     *
+     * @param title
+     * @param dataList
+     * @param memberName 成员变量名称,取该成员的值作为显示文本
+     */
+    public BottomListDialog setDataObj(String title, List<Object> dataList, String memberName) {
+        return setData(title, dataList, memberName);
+    }
+
+    /**
+     * 设置数据列表
+     *
+     * @param title
+     * @param dataList 实现ItemShowText接口的对象，通过实现itemShowText函数返回要显示的文本
+     */
+    public BottomListDialog setDataObj(String title, List<ItemShowText> dataList) {
+        return setData(title, dataList, null);
+    }
+
+    /**
+     * 设置数据列表
+     *
+     * @param title
+     * @param dataList
+     * @param memberName 成员变量名称,取该成员的值作为显示文本
+     */
+    private BottomListDialog setData(String title, List dataList, String memberName) {
         mTitle.setText(title);
-        adapter.setList(dataList);
+        adapter.setList(dataList, memberName);
+        adapter.notifyDataSetChanged();
+        return this;
+    }
+
+    public BottomListDialog setSelectIndex(int selectIndex) {
         adapter.setSelcetIndex(selectIndex);
         adapter.notifyDataSetChanged();
+        return this;
     }
 
     public void setOnItemClickListener(AdapterView.OnItemClickListener itemClickListener) {
         listView.setOnItemClickListener(itemClickListener);
     }
 
-    public void setSelectIndex(int selectIndex) {
-        adapter.setSelcetIndex(selectIndex);
-        adapter.notifyDataSetChanged();
-    }
-
 
     class DialogListAdapter extends BaseAdapter {
 
-        private List<String> list = new ArrayList<>();
+        private List list = new ArrayList<>();
         private int selcetIndex = -1; //选中下标
+        private String memberName; //成员变量名称,取该成员的值作为显示文本
 
         private LayoutInflater inflater;
         private Context mContext;
@@ -105,8 +139,13 @@ public class BottomListDialog extends Dialog {
             inflater = LayoutInflater.from(mContext);
         }
 
-        public void setList(List<String> list) {
+        /**
+         * @param list
+         * @param memberName 成员变量名称,取该成员的值作为显示文本
+         */
+        public void setList(List list, String memberName) {
             this.list = list;
+            this.memberName = memberName;
         }
 
         public void setSelcetIndex(int selcetIndex) {
@@ -144,7 +183,24 @@ public class BottomListDialog extends Dialog {
             //一定要判刑断下数据源是否为空，否则很大几率就crash了
             if (list != null && !list.isEmpty()) {
                 hv.iv.setVisibility(position == selcetIndex ? View.VISIBLE : View.INVISIBLE);
-                hv.tv.setText(list.get(position));
+                if (list.get(position) instanceof String) {
+                    hv.tv.setText((String) list.get(position));
+                } else if (!TextUtils.isEmpty(memberName)) {
+                    try {
+//                    Class c = Class.forName(User.class.getCanonicalName());
+                        Object obj = list.get(position);
+                        Class c = obj.getClass();
+                        // Field f = c.getField("name");
+                        Field f = c.getDeclaredField(memberName); //能获取到私有变量
+                        f.setAccessible(true);//暴力访问，能获取到私有权限
+                        String showText = f.get(obj).toString();
+                        hv.tv.setText(showText);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                } else if (list.get(position) instanceof ItemShowText) {
+                    hv.tv.setText(((ItemShowText) list.get(position)).itemShowText() + "");
+                }
             }
 
             //给个回调，让调用都者可以自定义条目的显示
@@ -163,15 +219,28 @@ public class BottomListDialog extends Dialog {
 
     }
 
+    /**
+     * 条目显示文本
+     */
+    interface ItemShowText {
+        String itemShowText();
+    }
 
-    private adapterGetViewCallback getViewCallback;
 
-    public void setGetViewCallback(adapterGetViewCallback getViewCallback) {
+    private AdapterGetViewCallback getViewCallback;
+
+    /**
+     * 设置列表条目getView时的回调，可以做指定条目的额外显示等处理
+     *
+     * @param getViewCallback
+     */
+    public void setGetViewCallback(AdapterGetViewCallback getViewCallback) {
         this.getViewCallback = getViewCallback;
     }
 
-    interface adapterGetViewCallback<T> {
+    interface AdapterGetViewCallback<T> {
         void getView(DialogListAdapter.MyViewHolder viewHolder, int position, T item);
     }
+
 
 }

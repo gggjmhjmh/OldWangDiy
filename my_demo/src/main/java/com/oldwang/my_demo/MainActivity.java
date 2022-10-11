@@ -3,6 +3,7 @@ package com.oldwang.my_demo;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.oldwang.librarymodule.diy.BottomListDialog;
 import com.oldwang.librarymodule.diy.MessageDialog;
 import com.oldwang.my_demo.activity.CircleProgessActivity;
 import com.oldwang.my_demo.activity.LetterIndexActivity;
@@ -20,9 +21,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -143,5 +146,23 @@ public class MainActivity extends AppCompatActivity {
                         MainActivity.super.onBackPressed();
                     }
                 }).setCanceledOnTouchOutside(true);
+
+
+        List<String> list = new ArrayList<>();
+        list.add("1");
+        list.add("2");
+        list.add("3");
+        list.add("4");
+        list.add("5");
+        list.add("6");
+        final BottomListDialog bottomListDialog =  new BottomListDialog(this).setData("标题",list).setSelectIndex(1);
+        bottomListDialog.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                bottomListDialog.setSelectIndex(i);
+//                bottomListDialog.dismiss();
+            }
+        });
+        bottomListDialog.show();
     }
 }
