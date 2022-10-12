@@ -61,6 +61,35 @@ Step 2. Add the dependency
   
   //还可以传 实现了ItemShowText接口的对象列表，通过实现itemShowText()返回条目的显示文本
   new BottomListDialog(this).setDataObj("标题",list);
+
+  //还可以自定义条目
+      /**
+       * 设置列表条目getView时的回调
+       *
+       * @param getViewCallback
+       */
+      public void setGetViewCallback(AdapterGetViewCallback getViewCallback) {
+          this.getViewCallback = getViewCallback;
+      }
+
+      interface AdapterGetViewCallback<T> {
+          /**
+           * 完全自己定义条目
+           */
+          default View diyItemView(int position, View convertView, ViewGroup parent) {
+              return null;
+          }
+
+          /**
+           * 在 getView() 之后, 可以做条目的额外显示等处理。
+           * 如果自定义了条目(diyItemView())返回了View，该方法不会再走
+           *
+           * @param viewHolder
+           * @param position
+           * @param item
+           */
+          void getViewAfter(DialogListAdapter.MyViewHolder viewHolder, int position, T item);
+      }
 ```
 
     
