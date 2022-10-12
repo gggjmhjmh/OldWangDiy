@@ -120,6 +120,12 @@ public class BottomListDialog extends Dialog {
         return this;
     }
 
+    public BottomListDialog setSelectImg(int imgResId) {
+        adapter.setSelcetImg(imgResId);
+        adapter.notifyDataSetChanged();
+        return this;
+    }
+
     public void setOnItemClickListener(AdapterView.OnItemClickListener itemClickListener) {
         listView.setOnItemClickListener(itemClickListener);
     }
@@ -129,6 +135,7 @@ public class BottomListDialog extends Dialog {
 
         private List list = new ArrayList<>();
         private int selcetIndex = -1; //选中下标
+        private int imgResId = 0; //选中图片id
         private String memberName; //成员变量名称,取该成员的值作为显示文本
 
         private LayoutInflater inflater;
@@ -150,6 +157,10 @@ public class BottomListDialog extends Dialog {
 
         public void setSelcetIndex(int selcetIndex) {
             this.selcetIndex = selcetIndex;
+        }
+
+        public void setSelcetImg(int imgResId) {
+            this.imgResId = imgResId;
         }
 
         @Override
@@ -190,6 +201,7 @@ public class BottomListDialog extends Dialog {
             }
             //一定要判刑断下数据源是否为空，否则很大几率就crash了
             if (list != null && !list.isEmpty()) {
+                if (imgResId != 0) hv.iv.setImageResource(imgResId);
                 hv.iv.setVisibility(position == selcetIndex ? View.VISIBLE : View.INVISIBLE);
                 if (list.get(position) instanceof String) {
                     hv.tv.setText((String) list.get(position));
