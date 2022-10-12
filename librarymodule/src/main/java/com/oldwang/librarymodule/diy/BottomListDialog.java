@@ -169,6 +169,14 @@ public class BottomListDialog extends Dialog {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
+            //如果调用者自定义view
+            if (getViewCallback != null) {
+                convertView = getViewCallback.diyItemView(position, convertView, parent);
+                if (convertView != null) {
+                    return convertView;
+                }
+            }
+
             MyViewHolder hv;
             if (null == convertView) {
                 hv = new MyViewHolder();
@@ -203,9 +211,9 @@ public class BottomListDialog extends Dialog {
                 }
             }
 
-            //给个回调，让调用都者可以自定义条目的显示
+            //给个回调，让调用者可以自定义条目的额外显示
             if (getViewCallback != null) {
-                getViewCallback.getView(hv, position, list.get(position));
+                getViewCallback.getViewAfter(hv, position, list.get(position));
             }
 
             return convertView;
@@ -230,7 +238,7 @@ public class BottomListDialog extends Dialog {
     private AdapterGetViewCallback getViewCallback;
 
     /**
-     * 设置列表条目getView时的回调，可以做指定条目的额外显示等处理
+     * 设置列表条目getView时的回调
      *
      * @param getViewCallback
      */
@@ -239,7 +247,22 @@ public class BottomListDialog extends Dialog {
     }
 
     interface AdapterGetViewCallback<T> {
-        void getView(DialogListAdapter.MyViewHolder viewHolder, int position, T item);
+        /**
+         * 完全自己定义条目
+         */
+        default View diyItemView(int position, View convertView, ViewGroup parent) {
+            return null;
+        }
+
+        /**
+         * 在 getView() 之后, 可以做条目的额外显示等处理。
+         * 如果自定义了条目(diyItemView())返回了View，该方法不会再走
+         *
+         * @param viewHolder
+         * @param position
+         * @param item
+         */
+        void getViewAfter(DialogListAdapter.MyViewHolder viewHolder, int position, T item);
     }
 
 
