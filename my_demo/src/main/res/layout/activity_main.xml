@@ -162,6 +162,14 @@
                 android:onClick="doClick"
                 android:text="定位页面" />
 
+            <Button
+                android:id="@+id/bottomListDialog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:onClick="doClick"
+                android:text="底部列表弹框" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

@@ -21,7 +21,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -133,8 +135,41 @@ public class MainActivity extends AppCompatActivity {
             case R.id.location: //定位
                 startActivity(new Intent(this, LocationActivity.class));
                 break;
+            case R.id.bottomListDialog: //底部列表弹框
+                showBottomListDialog();
+                break;
         }
 
+    }
+
+    private void showBottomListDialog() {
+        List<String> list = new ArrayList<>();
+        list.add("1");
+        list.add("2");
+        list.add("3");
+        final BottomListDialog bottomListDialog = new BottomListDialog(this).setData("标题", list).setSelectIndex(1);
+        bottomListDialog.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                bottomListDialog.setSelectIndex(i);
+//                bottomListDialog.dismiss();
+            }
+        });
+        bottomListDialog.show();
+
+        bottomListDialog.setAdapterGetViewCallback(new BottomListDialog.AdapterGetViewCallback<String>() {
+            @Override
+            public View diyItemView(int position, View convertView, ViewGroup parent) {
+                return null;
+            }
+
+            @Override
+            public void getViewAfter(int position, View convertView, String item) {
+                if (position == 1) {
+                    ((TextView) convertView.findViewById(R.id.tv)).setText("啦啦啦");
+                }
+            }
+        });
     }
 
     @Override
@@ -146,23 +181,5 @@ public class MainActivity extends AppCompatActivity {
                         MainActivity.super.onBackPressed();
                     }
                 }).setCanceledOnTouchOutside(true);
-
-
-        List<String> list = new ArrayList<>();
-        list.add("1");
-        list.add("2");
-        list.add("3");
-        list.add("4");
-        list.add("5");
-        list.add("6");
-        final BottomListDialog bottomListDialog =  new BottomListDialog(this).setData("标题",list).setSelectIndex(1);
-        bottomListDialog.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                bottomListDialog.setSelectIndex(i);
-//                bottomListDialog.dismiss();
-            }
-        });
-        bottomListDialog.show();
     }
 }

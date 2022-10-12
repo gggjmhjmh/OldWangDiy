@@ -225,7 +225,7 @@ public class BottomListDialog extends Dialog {
 
             //给个回调，让调用者可以自定义条目的额外显示
             if (getViewCallback != null) {
-                getViewCallback.getViewAfter(hv, position, list.get(position));
+                getViewCallback.getViewAfter(position, convertView, list.get(position));
             }
 
             return convertView;
@@ -254,11 +254,11 @@ public class BottomListDialog extends Dialog {
      *
      * @param getViewCallback
      */
-    public void setGetViewCallback(AdapterGetViewCallback getViewCallback) {
+    public void setAdapterGetViewCallback(AdapterGetViewCallback getViewCallback) {
         this.getViewCallback = getViewCallback;
     }
 
-    interface AdapterGetViewCallback<T> {
+    public interface AdapterGetViewCallback<T> {
         /**
          * 完全自己定义条目
          */
@@ -270,11 +270,12 @@ public class BottomListDialog extends Dialog {
          * 在 getView() 之后, 可以做条目的额外显示等处理。
          * 如果自定义了条目(diyItemView())返回了View，该方法不会再走
          *
-         * @param viewHolder
          * @param position
+         * @param convertView
          * @param item
          */
-        void getViewAfter(DialogListAdapter.MyViewHolder viewHolder, int position, T item);
+        default void getViewAfter(int position, View convertView, T item) {
+        }
     }
 
 
