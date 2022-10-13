@@ -13,22 +13,19 @@ public class WindowDimUtil {
      * @param isDim  是变暗还是恢复变亮
      */
     public static void windowDim(Window window, boolean isDim) {
-        WindowManager.LayoutParams params = window.getAttributes();
-        params.alpha = isDim ? 0.5f : 1f;
-        window.setAttributes(params);
+        windowDim(window, isDim ? 0.5f : 1f);
     }
 
     /**
      * 页面变暗/变亮
      *
      * @param window   页面窗口
-     * @param isDim    是变暗还是恢复变亮
      * @param dimValue 变暗的值
      */
-    public static void windowDim(Window window, boolean isDim, float dimValue) {
+    public static void windowDim(Window window, float dimValue) {
         if (window == null) return;
         WindowManager.LayoutParams params = window.getAttributes();
-        params.alpha = isDim ? dimValue : 1f;
+        params.alpha = dimValue;
         window.setAttributes(params);
     }
 
@@ -48,7 +45,7 @@ public class WindowDimUtil {
      *
      * @param window   页面窗口
      * @param isDim    是变暗还是恢复变亮
-     * @param dimValue 变暗的值
+     * @param dimValue 暗的值
      */
     public static void windowAnimationDim(Window window, boolean isDim, float dimValue) {
         if (window == null) return;
