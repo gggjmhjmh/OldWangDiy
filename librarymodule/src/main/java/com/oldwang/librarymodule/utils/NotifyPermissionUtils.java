@@ -40,7 +40,7 @@ public class NotifyPermissionUtils {
     }
 
 
-    //去打开通知权限
+    //去打开通知权限弹框
     public static void openNotifyP(final Context mContext) {
         //用户是否打开了通知权限
         if (isOpen(mContext)) {

@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.oldwang.librarymodule.R;
@@ -110,10 +111,13 @@ public class MessageDialog extends Dialog implements View.OnClickListener {
         }
         //消息体
         TextView tv_message = findViewById(R.id.tv_message);
+        ScrollView scrollView = findViewById(R.id.scrollView);
         if (tv_message != null) {
             if (TextUtils.isEmpty(message)) {
+                if (scrollView != null) scrollView.setVisibility(View.GONE);
                 tv_message.setVisibility(View.GONE);
             } else {
+                if (scrollView != null) scrollView.setVisibility(View.VISIBLE);
                 tv_message.setVisibility(View.VISIBLE);
                 tv_message.setText(message);
             }

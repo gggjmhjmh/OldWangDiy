@@ -4,6 +4,9 @@ import android.animation.ValueAnimator;
 import android.view.Window;
 import android.view.WindowManager;
 
+/**
+ * 页面变暗/变亮
+ */
 public class WindowDimUtil {
 
     /**
