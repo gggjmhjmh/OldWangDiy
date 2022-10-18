@@ -43,7 +43,7 @@ public class BottomListDialog extends Dialog {
         window.setGravity(Gravity.BOTTOM);
         //设置弹入弹出动画
         window.setWindowAnimations(R.style.BottomDialog_Animation);
-        //设置为全屏dialog
+        //设置为横向全屏
         WindowManager.LayoutParams params = window.getAttributes();
         params.width = WindowManager.LayoutParams.MATCH_PARENT;
         params.height = WindowManager.LayoutParams.WRAP_CONTENT;

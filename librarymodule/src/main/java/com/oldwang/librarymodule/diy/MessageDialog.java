@@ -99,6 +99,25 @@ public class MessageDialog extends Dialog implements View.OnClickListener {
 
         this.setCanceledOnTouchOutside(false);
 
+        windowDeploy();
+        initView();
+    }
+
+
+    @SuppressWarnings("deprecation")
+    public void windowDeploy() {
+        Window window = getWindow(); // 得到对话框
+        window.setBackgroundDrawableResource(R.color.tran);
+        WindowManager.LayoutParams wl = window.getAttributes();
+        //wl.gravity = Gravity.CENTER;
+        //设置为横向全屏
+        wl.width = ViewGroup.LayoutParams.MATCH_PARENT;
+//        wl.width = ViewGroup.LayoutParams.WRAP_CONTENT; //这样才能居中显示，才能点击外面dialog消失
+        window.setAttributes(wl);
+        //wl.type = WindowManager.LayoutParams.TYPE_SYSTEM_ALERT;
+    }
+
+    private void initView() {
         //标题
         TextView tv_title = findViewById(R.id.tv_title);
         if (tv_title != null) {
@@ -155,30 +174,6 @@ public class MessageDialog extends Dialog implements View.OnClickListener {
         View ok = findViewById(R.id.ok);
         if (ok != null)
             ok.setOnClickListener(this);
-
-
-        windowDeploy();
-    }
-
-
-    @SuppressWarnings("deprecation")
-    public void windowDeploy() {
-        Window window = getWindow(); // 得到对话框
-        window.setBackgroundDrawableResource(R.color.tran);
-        WindowManager.LayoutParams wl = window.getAttributes();
-        //wl.gravity = Gravity.CENTER;
-        //wl.gravity = Gravity.CENTER_HORIZONTAL;
-        WindowManager m = window.getWindowManager();
-        wl.width = ViewGroup.LayoutParams.MATCH_PARENT;
-//        wl.width = ViewGroup.LayoutParams.WRAP_CONTENT; //这样才能居中显示，才能点击外面dialog消失
-//        wl.height = ViewGroup.LayoutParams.WRAP_CONTENT;//这样才能居中显示，才能点击外面dialog消失
-        //      Display d = m.getDefaultDisplay(); // 为获取屏幕宽、高
-        //		wl.width = d.getWidth();
-        //		wl.height = d.getHeight();
-        window.setAttributes(wl);
-
-
-        //wl.type = WindowManager.LayoutParams.TYPE_SYSTEM_ALERT;
     }
 
     @Override

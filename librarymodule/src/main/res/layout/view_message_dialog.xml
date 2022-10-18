@@ -7,7 +7,7 @@
     android:layout_marginRight="50dp"
     android:background="@drawable/bg_messge_dialog"
     android:orientation="vertical"
-    android:paddingTop="20dp">
+    android:paddingTop="15dp">
 
     <TextView
         android:id="@+id/tv_title"
@@ -19,6 +19,7 @@
         android:layout_marginRight="20dp"
         android:gravity="center"
         android:maxLines="3"
+        android:text="标题"
         android:textColor="#252525"
         android:textSize="18sp"
         android:visibility="visible"
@@ -49,6 +50,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
+                android:text="我是内容"
                 android:textColor="#505050"
                 android:textSize="16sp"
                 android:visibility="visible" />
@@ -59,8 +61,8 @@
         android:id="@+id/line0"
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:layout_marginTop="30dp"
-        android:background="#493C3C43"
+        android:layout_marginTop="25dp"
+        android:background="#ddd"
         app:layout_constraintTop_toBottomOf="@+id/scrollView" />
 
     <LinearLayout
