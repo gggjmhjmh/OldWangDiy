@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
 
-    private ImageView target;
+    private ImageView iv,iv2;
 
     private GSYADVideoPlayer ADVideoPlayer;
     private OrientationUtils orientationUtils;
@@ -58,33 +58,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        target = findViewById(R.id.iv);
+        iv = findViewById(R.id.iv);
+        iv2 = findViewById(R.id.iv2);
 
-        test();
-
-
-//        downImg();
         loadImg();
+        downImg();
 
 //        gsyVideo();
 //        jiaoZi();
     }
 
 
-    private  int i;
-    private void test() {
-        ToastUtils.setGravity(Gravity.CENTER,0,0);
-        ToastUtils.setBgColor(Color.BLACK);
-        ToastUtils.setMsgColor(Color.WHITE);
-        target.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ToastUtils.showShort(i+"");
-                i++;
-            }
-        });
-
-    }
 
     private void jiaoZi() {
 
@@ -98,8 +82,8 @@ public class MainActivity extends AppCompatActivity {
 
         jzvdLocalPath = findViewById(R.id.lcoal_path);
         //播放本地sd视频文件
-        String localVideoPath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/aaa/local_video.mp4";
-        jzvdLocalPath.setUp(localVideoPath, "Play Local Video");
+        String url = copyVideoToLocalPath("local_video.mp4", "aaa");
+        jzvdLocalPath.setUp(url, "Play Local Video");
         jzvdLocalPath.fullscreenButton.performClick();  //全屏
         jzvdLocalPath.startButton.performClick();  //播放
     }
@@ -180,8 +164,8 @@ public class MainActivity extends AppCompatActivity {
 
         if (!checkPermission()) return;
 
-//        ADVideoPlayer = findViewById(R.id.ad_player);
-//        videoPlayer = findViewById(R.id.player);
+        ADVideoPlayer = findViewById(R.id.ad_player);
+        videoPlayer = findViewById(R.id.player);
 
 
         //EXOPlayer内核，支持格式更多
@@ -200,11 +184,11 @@ public class MainActivity extends AppCompatActivity {
 
         urls.add(new GSYSampleADVideoPlayer.GSYADVideoModel(url, "", GSYSampleADVideoPlayer.GSYADVideoModel.TYPE_AD));
         //正式内容1
-        urls.add(new GSYSampleADVideoPlayer.GSYADVideoModel("http://9890.vod.myqcloud.com/9890_4e292f9a3dd011e6b4078980237cc3d3.f20.mp4", "正文1标题", GSYSampleADVideoPlayer.GSYADVideoModel.TYPE_NORMAL));
+//        urls.add(new GSYSampleADVideoPlayer.GSYADVideoModel("http://a.mp4", "正文1标题", GSYSampleADVideoPlayer.GSYADVideoModel.TYPE_NORMAL));
         //广告2
         urls.add(new GSYSampleADVideoPlayer.GSYADVideoModel("http://7xjmzj.com1.z0.glb.clouddn.com/20171026175005_JObCxCE2.mp4", "", GSYSampleADVideoPlayer.GSYADVideoModel.TYPE_AD, true));
         //正式内容2
-        urls.add(new GSYSampleADVideoPlayer.GSYADVideoModel("http://9890.vod.myqcloud.com/9890_4e292f9a3dd011e6b4078980237cc3d3.f30.mp4", "正文2标题", GSYSampleADVideoPlayer.GSYADVideoModel.TYPE_NORMAL));
+//        urls.add(new GSYSampleADVideoPlayer.GSYADVideoModel("http://b.mp4", "正文2标题", GSYSampleADVideoPlayer.GSYADVideoModel.TYPE_NORMAL));
 
 
         //封面ImageView
@@ -262,7 +246,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 //todo 待处理 广告视频播放器
-
+/*
         ADVideoPlayer.setUp(url, true, "");
 //增加封面
         ADVideoPlayer.setThumbImageView(imageView);
@@ -277,7 +261,7 @@ public class MainActivity extends AppCompatActivity {
 
 //        ADVideoPlayer.setVideoAllCallBack(this);
 
-        /*ADVideoPlayer.setLockClickListener(new LockClickListener() {
+        *//*ADVideoPlayer.setLockClickListener(new LockClickListener() {
             @Override
             public void onClick(View view, boolean lock) {
                 if (orientationUtils != null) {
@@ -285,7 +269,7 @@ public class MainActivity extends AppCompatActivity {
                     orientationUtils.setEnable(!lock);
                 }
             }
-        });*/
+        });*//*
 
 
         ADVideoPlayer.getFullscreenButton().setOnClickListener(new View.OnClickListener() {
@@ -293,7 +277,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 resolveFullBtn(ADVideoPlayer);
             }
-        });
+        });*/
     }
 
     private void resolveNormalVideoUI() {
@@ -319,7 +303,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Response<File> response) {
 //                iv.setImageURI(Uri.fromFile(response.body()));
-                        Glide.with(MainActivity.this).load(response.body()).into(target);
+                        Glide.with(MainActivity.this).load(response.body()).into(iv2);
                     }
 
                     @Override
@@ -337,7 +321,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadImg() {
         String url = "http://wx.sunzhoubo.top/img/b.jpg";
-//        Glide.with(this).load(url).into(target);
+//        Glide.with(this).load(url).into(iv);
 
        /* //加载gzip，不这样做好像也可以加载gzip
         GlideUrl glideUrl = new GlideUrl(url, new Headers() {
@@ -351,12 +335,12 @@ public class MainActivity extends AppCompatActivity {
         });
         System.out.println("~~~~~~~~~~~" + glideUrl.getHeaders());
 
-        Glide.with(this).load(glideUrl).into(target);*/
+        Glide.with(this).load(glideUrl).into(iv);*/
 
 
         Glide.with(this).load(url)
                 .apply(RequestOptions.bitmapTransform(new BlurTransformation()))
-                .into(target);
+                .into(iv);
 
     }
 
