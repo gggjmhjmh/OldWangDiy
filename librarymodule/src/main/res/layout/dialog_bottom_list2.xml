@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginBottom="10dp"
+    android:paddingBottom="5dp">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:gravity="center"
+        android:textColor="#FF8B8B8B"
+        android:textSize="16sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.flyco.roundview.RoundLinearLayout
+        android:id="@+id/listView_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_max="450dp"
+        app:layout_constraintHeight_min="100dp"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        app:rv_backgroundColor="#FFFFFF"
+        app:rv_cornerRadius="16dp">
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="#E5E5E5"
+            android:dividerHeight="1dp"
+            app:layout_constrainedHeight="true" />
+    </com.flyco.roundview.RoundLinearLayout>
+
+    <com.flyco.roundview.RoundTextView
+        android:id="@+id/cancel"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="取消"
+        android:textColor="@color/colorPrimary"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/listView_layout"
+        app:rv_backgroundColor="#EEF9F9F9"
+        app:rv_cornerRadius="16dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
