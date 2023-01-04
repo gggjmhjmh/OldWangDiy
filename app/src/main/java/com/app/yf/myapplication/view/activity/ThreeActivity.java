@@ -25,7 +25,7 @@ public class ThreeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 //                finishAfterTransition();
-                supportFinishAfterTransition();
+//                supportFinishAfterTransition();
             }
         });
 
