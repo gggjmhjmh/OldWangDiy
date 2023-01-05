@@ -37,7 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_marginTop="8dp"
-        android:alpha="0.8"
+        android:alpha="0.85"
         android:background="@drawable/bg_bottom_dialog2"
         android:gravity="center"
         android:text="取消"
