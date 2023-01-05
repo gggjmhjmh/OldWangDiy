@@ -169,6 +169,13 @@
                 android:layout_marginRight="10dp"
                 android:onClick="doClick"
                 android:text="底部列表弹框" />
+            <Button
+                android:id="@+id/bottomListDialog2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:onClick="doClick"
+                android:text="底部列表弹框2" />
 
             <TextView
                 android:layout_width="match_parent"

@@ -2,6 +2,7 @@ package com.oldwang.librarymodule.diy;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -68,8 +69,12 @@ public class BottomListDialog2 extends Dialog {
 
         adapter = new DialogListAdapter(mContext);
         listView.setAdapter(adapter);
-
-        findViewById(R.id.cancel).setOnClickListener(view -> dismiss());
+        findViewById(R.id.cancel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dismiss();
+            }
+        });
     }
 
     /**

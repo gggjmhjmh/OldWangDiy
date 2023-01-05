@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.oldwang.librarymodule.diy.BottomListDialog;
+import com.oldwang.librarymodule.diy.BottomListDialog2;
 import com.oldwang.librarymodule.diy.MessageDialog;
 import com.oldwang.my_demo.activity.CircleProgessActivity;
 import com.oldwang.my_demo.activity.LetterIndexActivity;
@@ -138,6 +139,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.bottomListDialog: //底部列表弹框
                 showBottomListDialog();
                 break;
+            case R.id.bottomListDialog2: //底部列表弹框2
+                showBottomListDialog2();
+                break;
         }
 
     }
@@ -170,6 +174,22 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+    //显示添加记录弹框
+    private void showBottomListDialog2() {
+        final BottomListDialog2 bottomListDialog2 = new BottomListDialog2(this);
+        List<String> list = new ArrayList<>();
+        list.add("1");
+        list.add("2");
+        list.add("3");
+        bottomListDialog2.setData("", list);
+        bottomListDialog2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                bottomListDialog2.dismiss();
+            }
+        });
+        bottomListDialog2.show();
     }
 
     @Override
