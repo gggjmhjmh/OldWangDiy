@@ -1,8 +1,11 @@
 package com.oldwang.my_demo;
 
 import android.content.Intent;
+import android.content.MutableContextWrapper;
+import android.graphics.Color;
 import android.os.Bundle;
 
+import com.oldwang.librarymodule.diy.BottomDialog;
 import com.oldwang.librarymodule.diy.BottomListDialog;
 import com.oldwang.librarymodule.diy.BottomListDialog2;
 import com.oldwang.librarymodule.diy.MessageDialog;
@@ -19,6 +22,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.Gravity;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -136,6 +140,20 @@ public class MainActivity extends AppCompatActivity {
             case R.id.location: //定位
                 startActivity(new Intent(this, LocationActivity.class));
                 break;
+            case R.id.bottomDialog: //底部弹框
+                new BottomDialog(this) {
+                    @Override
+                    protected void setContentView() {
+                        TextView tv = new TextView(mContext);
+                        setContentView(tv);
+                        tv.getLayoutParams().width = ViewGroup.LayoutParams.MATCH_PARENT;
+                        tv.getLayoutParams().height = 500;
+                        tv.setGravity(Gravity.CENTER);
+                        tv.setText("你很帅");
+                        tv.setBackgroundColor(Color.parseColor("#ffffff"));
+                    }
+                }.show();
+                break;
             case R.id.bottomListDialog: //底部列表弹框
                 showBottomListDialog();
                 break;
@@ -146,6 +164,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //显示底部列表弹框
     private void showBottomListDialog() {
         List<String> list = new ArrayList<>();
         list.add("1");
@@ -175,7 +194,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    //显示添加记录弹框
+
+    //显示底部列表弹框2
     private void showBottomListDialog2() {
         final BottomListDialog2 bottomListDialog2 = new BottomListDialog2(this);
         List<String> list = new ArrayList<>();

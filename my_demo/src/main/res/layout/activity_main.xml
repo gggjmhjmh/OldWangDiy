@@ -163,12 +163,21 @@
                 android:text="定位页面" />
 
             <Button
+                android:id="@+id/bottomDialog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:onClick="doClick"
+                android:text="底部弹框" />
+
+            <Button
                 android:id="@+id/bottomListDialog"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
                 android:onClick="doClick"
                 android:text="底部列表弹框" />
+
             <Button
                 android:id="@+id/bottomListDialog2"
                 android:layout_width="wrap_content"

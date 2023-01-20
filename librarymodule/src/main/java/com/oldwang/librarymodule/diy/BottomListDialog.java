@@ -1,15 +1,10 @@
 package com.oldwang.librarymodule.diy;
 
-import android.app.Dialog;
 import android.content.Context;
-import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
@@ -26,41 +21,22 @@ import java.util.List;
  * 底部列表弹框
  */
 
-public class BottomListDialog extends Dialog {
-    private Context mContext;
-
-    private ListView listView;
+public class BottomListDialog extends BottomDialog {
     private TextView mTitle;
-
+    private ListView listView;
     private DialogListAdapter adapter;
 
-    public BottomListDialog(Context context) {
-        super(context, R.style.BottomDialog);
-        mContext = context;
+    @Override
+    protected void setContentView() {
         setContentView(R.layout.dialog_bottom_list);
-        Window window = this.getWindow();
-        //设置位置在屏幕底部
-        window.setGravity(Gravity.BOTTOM);
-        //设置弹入弹出动画
-        window.setWindowAnimations(R.style.BottomDialog_Animation);
-        //设置为横向全屏
-        WindowManager.LayoutParams params = window.getAttributes();
-        params.width = WindowManager.LayoutParams.MATCH_PARENT;
-        params.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        window.setAttributes(params);
+    }
 
-        //        setCancelable(false);
-//        setCanceledOnTouchOutside(true);
-
+    public BottomListDialog(Context context) {
+        super(context);
         initView();
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    private void initView() {
+    protected void initView() {
         listView = findViewById(R.id.listView);
         mTitle = findViewById(R.id.title);
 
