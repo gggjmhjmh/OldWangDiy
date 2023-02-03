@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppThemeDayNight">
 
+        <!-- 分析能力-->
+        <profileable android:shell="true" />
+
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="${AMAP_KEY}" />
