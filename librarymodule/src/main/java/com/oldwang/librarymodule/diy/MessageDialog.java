@@ -26,6 +26,7 @@ public class MessageDialog extends Dialog implements View.OnClickListener {
 
     private String title, message, left, right;
     private View layoutView;
+    private int layoutId;
     private OnBaseClickListener baseClickListener;
 
 
@@ -80,7 +81,7 @@ public class MessageDialog extends Dialog implements View.OnClickListener {
     }
 
     public MessageDialog setLayoutResId(int layoutResId) {
-        setLayoutView(LayoutInflater.from(getContext()).inflate(layoutResId, null));
+        this.layoutId = layoutResId;
         return this;
     }
 
@@ -93,13 +94,16 @@ public class MessageDialog extends Dialog implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        if (layoutView != null)
+        if (layoutView != null) {
             setContentView(layoutView);
-        else setContentView(createLayoutResId());
+        } else if (layoutId != 0) {
+            setContentView(layoutId);
+        } else setContentView(createLayoutResId());
 
         this.setCanceledOnTouchOutside(false);
 
         windowDeploy();
+
         initView();
     }
 
@@ -247,6 +251,7 @@ public class MessageDialog extends Dialog implements View.OnClickListener {
 
         default void onViewClick(View v) {
         }
+
     }
 
     /**
