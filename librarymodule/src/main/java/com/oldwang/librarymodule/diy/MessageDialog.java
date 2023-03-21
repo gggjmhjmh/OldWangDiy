@@ -125,24 +125,28 @@ public class MessageDialog extends Dialog implements View.OnClickListener {
         //标题
         TextView tv_title = findViewById(R.id.tv_title);
         if (tv_title != null) {
-            if (TextUtils.isEmpty(title)) {
-                tv_title.setVisibility(View.GONE);
-            } else {
-                tv_title.setVisibility(View.VISIBLE);
-                tv_title.setText(title);
+            if (title != null) { //默认null，啥也不干
+                if (TextUtils.isEmpty(title)) { //空字符串
+                    tv_title.setVisibility(View.GONE);
+                } else {
+                    tv_title.setVisibility(View.VISIBLE);
+                    tv_title.setText(title);
+                }
             }
         }
         //消息体
         TextView tv_message = findViewById(R.id.tv_message);
         ScrollView scrollView = findViewById(R.id.scrollView);
         if (tv_message != null) {
-            if (TextUtils.isEmpty(message)) {
-                if (scrollView != null) scrollView.setVisibility(View.GONE);
-                tv_message.setVisibility(View.GONE);
-            } else {
-                if (scrollView != null) scrollView.setVisibility(View.VISIBLE);
-                tv_message.setVisibility(View.VISIBLE);
-                tv_message.setText(message);
+            if (message != null) { //默认null，啥也不干
+                if (TextUtils.isEmpty(message)) {
+                    if (scrollView != null) scrollView.setVisibility(View.GONE);
+                    tv_message.setVisibility(View.GONE);
+                } else {
+                    if (scrollView != null) scrollView.setVisibility(View.VISIBLE);
+                    tv_message.setVisibility(View.VISIBLE);
+                    tv_message.setText(message);
+                }
             }
         }
 
@@ -150,18 +154,22 @@ public class MessageDialog extends Dialog implements View.OnClickListener {
         TextView btn_right = findViewById(R.id.btn_right);
         if (btn_left != null) {
             btn_left.setOnClickListener(this);
-            if (!TextUtils.isEmpty(left)) {
-                btn_left.setText(left);
-            } else {
-                btn_left.setVisibility(View.GONE);
+            if (left != null) { //默认null，啥也不干
+                if (TextUtils.isEmpty(left)) {
+                    btn_left.setVisibility(View.GONE);
+                } else {
+                    btn_left.setText(left);
+                }
             }
         }
         if (btn_right != null) {
             btn_right.setOnClickListener(this);
-            if (!TextUtils.isEmpty(right)) {
-                btn_right.setText(right);
-            } else {
-                btn_right.setVisibility(View.GONE);
+            if (left != null) { //默认null，啥也不干
+                if (TextUtils.isEmpty(right)) {
+                    btn_right.setVisibility(View.GONE);
+                } else {
+                    btn_right.setText(right);
+                }
             }
         }
 

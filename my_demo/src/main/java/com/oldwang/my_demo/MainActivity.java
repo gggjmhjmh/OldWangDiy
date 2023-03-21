@@ -214,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        new MessageDialog(this, "确定要退出应用?", "取消", "确定")
+        new MessageDialog(this, "确定要退出应用?", "", "确定")
                 .show(new MessageDialog.OnBaseClickListener() {
                     @Override
                     public void onRightBtClick(View v) {
