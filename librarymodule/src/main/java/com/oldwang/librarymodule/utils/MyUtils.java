@@ -1,5 +1,6 @@
 package com.oldwang.librarymodule.utils;
 
+import android.animation.ObjectAnimator;
 import android.app.AppOpsManager;
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +13,8 @@ import android.os.Binder;
 import android.os.Build;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
+import android.view.animation.CycleInterpolator;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.DeviceUtils;
@@ -711,6 +714,15 @@ public class MyUtils {
 //            mDisposable = null;
 //        }
 //    }
+
+
+    //视图抖动动画
+    public static void douDong(View mView) {
+        ObjectAnimator oa1 = ObjectAnimator.ofFloat(mView, View.TRANSLATION_X.getName(), 0, 8f);//抖动幅度0到8
+        oa1.setDuration(300);//持续时间
+        oa1.setInterpolator(new CycleInterpolator(4));//抖动次数
+        oa1.start();//开始动画
+    }
 
 
 }
